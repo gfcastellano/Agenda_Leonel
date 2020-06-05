@@ -25,9 +25,5 @@ Contará com:
     - métricas para produtos (rendimento, custo para cliente, etc)
     - métricas para clientes (quando compra, qual a quantia mais apropriada, qual a sazonalidade)
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
-<<<<<<< HEAD
 
-Como que funciona isso aqui?
-=======
-    
->>>>>>> f7c3a858860b4e25b262b2a5146ee5c64ef1e535
+Comentario adicionado para testar o vscode
