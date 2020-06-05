@@ -26,4 +26,4 @@ Contará com:
     - métricas para clientes (quando compra, qual a quantia mais apropriada, qual a sazonalidade)
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
 
-Comentario adicionado para testar o vscode
+Comentario retirado para testar o vscode
