@@ -1,7 +1,3 @@
-# Ta dificil
- aplicativo
-
-
 Aplicativo criado usando a biblioteca Kivy para python.
 
 Uso:
@@ -29,5 +25,5 @@ Contará com:
     - métricas para produtos (rendimento, custo para cliente, etc)
     - métricas para clientes (quando compra, qual a quantia mais apropriada, qual a sazonalidade)
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
-    
-Adicionando alguma coisa aqui pra testar o github
+
+Como que funciona isso aqui?
