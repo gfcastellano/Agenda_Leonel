@@ -1,3 +1,4 @@
+import kivy
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from Telas.menu_tela import Menu
