@@ -1,0 +1,25 @@
+#:import MDFillRoundFlatButton kivymd.uix.button.MDFillRoundFlatButton
+
+<Botao@MDFillRoundFlatButton>
+
+<Menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 100
+        spacing: 50
+        Botao:
+            text: 'Mapa'
+            on_release: app.root.current = 'Mapa_tela'
+        Botao:
+            text: 'Lista de Clientes'
+            on_release: print(len(app.dados_clientes))
+        Botao:
+            text: 'Busca Especifica'
+        Botao:
+            text: 'Lembretes'
+        Botao:
+            text: 'Adicionar Cliente'
+        Botao:
+            text: 'Sair'
+
+           
