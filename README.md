@@ -1,6 +1,6 @@
-Aplicativo *EM PROCESSO DE DESENVOLVIMENTO* que será criado usando a biblioteca Kivy para python.
+# Aplicativo *EM PROCESSO DE DESENVOLVIMENTO* que será criado usando a biblioteca Kivy para python.
 
-Uso:
+## Uso:
 - Visualizar, adicionar e editar lista de contatos comerciais
 - Visualizar distribuição de contatos comerciais em um mapa da cidade
 - Adicionar eventos de contato comercial (agenda)
@@ -9,13 +9,13 @@ Uso:
 - Adicionar lembretes 
 - Adicionar eventos automaticamente na agenda, criar assistete pessoal (Automatização de eventos, ligar, fazer visita, acompanhamento de venda)
 
-Código:
+## Código:
 Funcionalidade serão escritas em linguagem .py e design será escrito em "linguagem" .kv (tentaremos, né)
 
-Objetivo:
+## Objetivo:
 Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista de clientes, otimizando sua rotina de visitas.
 
-Contará com: 
+## Contará com: 
     - facil visualização de dados dos clientes;
     - mecanismo de busca por caracteristicas de clientes, como: região, porte, serviços, etc...
     - visualização de clientes cadastrados proximos da sua localização atual
