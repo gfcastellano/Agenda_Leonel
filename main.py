@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager
 from Telas.menu_tela import Menu
 from Telas.mapa_tela import Mapa_tela
 from Mapa.mapa import Mapa
+from Telas.clientes_tela import Clientes_tela
 
 import json
 
@@ -15,6 +16,7 @@ class Gerenciador(ScreenManager):
 class MainApp(MDApp):
     dados_clientes =[]
     def build(self):
+        self.theme_cls.primary_palette = "BlueGray"
         return Gerenciador()
 
     def on_start(self):
@@ -27,5 +29,5 @@ class MainApp(MDApp):
                 print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except FileNotFoundError:
                 print('clientes.json não achado no diretório')
-
+    
 MainApp().run()
