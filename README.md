@@ -2,6 +2,7 @@
 
 ## Uso/Aplicações:
 - Visualizar, adicionar e editar lista de contatos comerciais
+
 ✅| Visualizar distribuição de contatos comerciais em um mapa da cidade
 - Adicionar eventos de contato comercial (agenda)
 - Gerenciar estoques de produtos
