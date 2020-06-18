@@ -4,6 +4,7 @@
 - Visualizar, adicionar e editar lista de contatos comerciais
 
 ✅| Visualizar distribuição de contatos comerciais em um mapa da cidade
+
 ✅| Realizar buscas avançadas por caracteristicas especificas de clientes
 - Adicionar eventos de contato comercial (agenda)
 - Gerenciar estoques de produtos
