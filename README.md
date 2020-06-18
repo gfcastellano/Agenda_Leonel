@@ -27,5 +27,3 @@ Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista 
     - métricas para produtos (rendimento, custo para cliente, etc)
     - métricas para clientes (quando compra, qual a quantia mais apropriada, qual a sazonalidade)
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
-
-## Que que tá acontecendo?
