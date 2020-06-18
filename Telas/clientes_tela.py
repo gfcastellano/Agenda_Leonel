@@ -3,21 +3,23 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
-<<<<<<< HEAD
 from kivy.clock import Clock
+from kivy.core.window import Window
+
+
+
 
 
 
 class Clientes_tela(Screen):
     dados_clientes=[]
-=======
 
-
-class Clientes_tela(Screen):
-    
->>>>>>> master
     def on_pre_enter(self):
-        print('Entrando em Mapa_tela')
+        app = MDApp.get_running_app()
+        gerenciador = app.root
+        app.telas.append(str(gerenciador.current_screen)[14:-2])
+        Window.bind(on_keyboard=self.voltar)
+        print('Entrando em Clientes_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
@@ -25,31 +27,25 @@ class Clientes_tela(Screen):
             self.adicionar_clientes(self.dados_clientes)
 
     def adicionar_clientes(self,dados_clientes):
-<<<<<<< HEAD
         print('Adicionando clientes na tela Clientes_tela')
-=======
-        print('Adicionando clientes na tela')
->>>>>>> master
         scroll = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll
+        if len(dados_clientes) == 0: #Caso ele receba um match que contem nada
+            scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for cliente in dados_clientes:
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
 
-<<<<<<< HEAD
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
 
     def buscar(self,*args):
-=======
-    def buscar(self):
->>>>>>> master
-        print(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+        print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
-            texto = str(texto) #se manter no formato int não é possivel iterar
+            texto = str(texto).lower() #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
-            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text).lower()
             parametro = 'nome_fantasia'
         self.executar_busca(texto.lower(),parametro)
 
@@ -64,17 +60,30 @@ class Clientes_tela(Screen):
                     match.append(cliente)
         self.apagar_clientes()
         self.adicionar_clientes(match)
-<<<<<<< HEAD
         self.fechar_popup()
 
     def fechar_popup(self):
         MDApp.get_running_app().popup_leituradados.dismiss()
-=======
->>>>>>> master
 
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
 
+    def voltar(self,window,key,*args):
+        if key ==27:
+            gerenciador = MDApp.get_running_app().root
+            app = MDApp.get_running_app()
+            gerenciador.transition.direction = 'left'
+            gerenciador.current = str(app.telas[-2])
+            gerenciador.transition.direction = 'right'
+            try:
+                if app.telas[-1] == app.telas[-3]:
+                    app.telas = app.telas[:-2]
+            except IndexError:
+                app.telas = app.telas[:-1]
+            return True
+        if key == 113:
+            app = MDApp.get_running_app()
+            print(app.telas)
         
 
 
@@ -84,9 +93,6 @@ class Cliente(BoxLayout):
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> master
