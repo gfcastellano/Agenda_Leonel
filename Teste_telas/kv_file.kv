@@ -1,6 +1,6 @@
 
 
-<Clientes_tela>:
+Screen:
     BoxLayout:
         orientation:'vertical'
 #---------------------------------------HEADER
@@ -12,19 +12,18 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
-            right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:   
             size_hint_y: None
             height: 100
             MDTextField:
                 id: buscar
-                font_size: 40
+                font_size: 30
                 size_hint_x: 4
             MDIconButton:
                 text: 'Buscar'
-                on_release: root.apagar_texto() 
-                icon: 'backspace' 
+                on_release: root.mostrar_popup()
+                icon: 'account-search'
 #---------------------------------------LISTA DE CLIENTES
         ScrollView:   
             BoxLayout:
@@ -61,4 +60,3 @@
         icon: 'point-of-sale'
         size: self.size
                 
-

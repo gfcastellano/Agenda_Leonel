@@ -1,11 +1,10 @@
 
-
-<Busca_tela>:
+<Adicionar_cliente_tela>:
     BoxLayout:
         orientation: 'vertical'
 #---------------------------------------HEADER
         MDToolbar:
-            title: 'Busca Avancada'
+            title: 'Adicionar Cliente'
             md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
             height: 100
@@ -22,58 +21,82 @@
                     MDLabel:
                         text: 'Codigo:'
                         size_hint_x: 0.5
-                    MDTextField:
+                    MDLabel:
                         id: codigo
-                    MDIconApagar:
-                        on_release: root.apagar_texto('codigo')
+                        bold: True
                 BoxparaScroll:
                     MDLabel:
                         text: 'Nome:'
                         size_hint_x: 0.5
                     MDTextField:
                         id: nome_fantasia
-                    MDIconApagar:
-                        on_release: root.apagar_texto('nome_fantasia') 
                 BoxparaScroll:
                     MDLabel:
                         text: 'Endereco:'
                         size_hint_x: 0.5
                     MDTextField:
                         id: endereco
-                    MDIconApagar:
-                        on_release: root.apagar_texto('endereco') 
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Numero:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: numero
                 BoxparaScroll:
                     MDLabel:
                         text: 'Bairro:'
                         size_hint_x: 0.5
                     MDTextField:
                         id: bairro
-                    MDIconApagar:
-                        on_release: root.apagar_texto('bairro') 
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Cidade:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: cidade
                 BoxparaScroll:
                     MDLabel:
                         text: 'Telefone:'
                         size_hint_x: 0.5
                     MDTextField:
-                        id: telefone
-                    MDIconApagar:
-                        on_release: root.apagar_texto('telefone') 
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Contato:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: contato
-                    MDIconApagar:
-                        on_release: root.apagar_texto('contato') 
-                BoxparaScroll:
+                        id: telefone_fixo
+				BoxparaScroll:
                     MDLabel:
                         text: 'Perfil:'
                         size_hint_x: 0.5
                     MDTextField:
-                        id: perfil
-                    MDIconApagar:
-                        on_release: root.apagar_texto('perfil')
+                        id: perfil_cliente					
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Contato'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Telefone'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tipo'
+                        halign: 'center'
+                BoxparaScroll:
+                    MDTextField:
+                        id: nome_1
+                    MDTextField:
+                        id: telefone_1
+                    MDTextField:
+                        id: tipo_1
+				BoxparaScroll:
+                    MDTextField:
+                        id: nome_2
+                    MDTextField:
+                        id: telefone_2
+                    MDTextField:
+                        id: tipo_2
+				BoxparaScroll:
+                    MDTextField:
+                        id: nome_3
+                    MDTextField:
+                        id: telefone_3
+                    MDTextField:
+                        id: tipo_3
                 BoxparaScroll:
                     MDLabel:
                         text: 'Banho:'
@@ -102,45 +125,22 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: razao_social
-                    MDIconApagar:
-                        on_release: root.apagar_texto('razao_social') 
                 BoxparaScroll:
                     MDLabel:
                         text: 'CNPJ:'
                         size_hint_x: 0.5
                     MDTextField:
                         id: cnpj
-                    MDIconApagar:
-                        on_release: root.apagar_texto('cnpj') 
                 BoxparaScroll:
                     MDLabel:
                         text: 'CEP:'
                         size_hint_x: 0.5
                     MDTextField:
                         id: cep
-                    MDIconApagar:
-                        on_release: root.apagar_texto('cep')
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Therapet:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tesoura:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tapetinho:'
-                        halign: 'center'
-                BoxparaScroll:
-                    MDCheckbox:
-                        id: therapet
-                    MDCheckbox:
-                        id: tesoura
-                    MDCheckbox:
-                        id: tap_higienico
-#-------------------------------------------------------------BOTÃO DE BUSCA
+#-------------------------------------------------------------BOTaO DE ADICIONAR
         MDRaisedButton:
-            text: 'Buscar'
-            on_release: root.mostrar_popup()
+            text: 'Adicionar'
+            on_release: root.adicionar()
             size_hint_x: 1
             size_hint_y: None
             height: 100
@@ -151,6 +151,3 @@
     padding: [5,0,0,0]
     size_hint_y: None
     height: 120
-
-<MDIconApagar@MDIconButton>:
-    icon: 'backspace'

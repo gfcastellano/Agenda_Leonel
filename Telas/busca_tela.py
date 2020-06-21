@@ -7,6 +7,7 @@ from kivy.core.window import Window
 
 class Busca_tela(Screen):
     def on_pre_enter(self):
+        print('Entrando em Busca_tela')
         app = MDApp.get_running_app()
         gerenciador = app.root
         app.telas.append(str(gerenciador.current_screen)[14:-2])
@@ -22,6 +23,7 @@ class Busca_tela(Screen):
         Clock.schedule_once(self.busca_avancada,0.1)
 
     def busca_avancada(self,*args):
+        print('Executando busca avançada')
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids
         dicionario = {'codigo':  field['codigo'].text,
         'nome_fantasia' : field['nome_fantasia'].text,
@@ -85,8 +87,10 @@ class Busca_tela(Screen):
         clientes_tela = MDApp.get_running_app().root.get_screen('Clientes_tela')
         clientes_tela.apagar_clientes()
         clientes_tela.adicionar_clientes(match)
+        clientes_tela.apagar_texto()
         MDApp.get_running_app().carregar_clientes() #Não entendo pq dá um erro se não executar isso.
         # Ele usa o match que é passado na chamada da função acima e instaura o Clientes_tela.dados_clientes como match.
+        MDApp.get_running_app().root.transition.direction = 'left'
         MDApp.get_running_app().root.current = 'Clientes_tela'
         clientes_tela.fechar_popup()
 
@@ -106,6 +110,18 @@ class Busca_tela(Screen):
         if key == 113:
             app = MDApp.get_running_app()
             print(app.telas)
+    
+    def voltar_toolbar(self):
+        gerenciador = MDApp.get_running_app().root
+        app = MDApp.get_running_app()
+        gerenciador.transition.direction = 'left'
+        gerenciador.current = str(app.telas[-2])
+        gerenciador.transition.direction = 'right'
+        try:
+            if app.telas[-1] == app.telas[-3]:
+                app.telas = app.telas[:-2]
+        except IndexError:
+            app.telas = app.telas[:-1]
 
 
              
