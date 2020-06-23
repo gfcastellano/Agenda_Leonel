@@ -108,17 +108,45 @@ class MainApp(MDApp):
 
     def voltar_toolbar(self):
         app = MDApp.get_running_app()
-        app.root.transition.direction = 'left'
-        if str(app.telas[-2]) == 'Editar_tela':
-            app.root.current = str(app.telas[-4])
-        else:
-            app.root.current = str(app.telas[-2])
-        app.root.transition.direction = 'right'
-        try:
-            if app.telas[-1] == app.telas[-3]:
-                app.telas = app.telas[:-2]
+        try:         
+            tela_atual = str(app.telas[-1])
         except IndexError:
-            app.telas = app.telas[:-1]
+            app.telas = ['Menu_tela']
+            tela_atual = str(app.telas[-1])
+        try:
+            ultima_tela = str(app.telas[-2])
+        except IndexError:
+            ultima_tela = tela_atual
+        #print('=========================')
+        #print('TELA_ATUAL: ', tela_atual)
+        #print('ULTIMA_TELA:', ultima_tela)
+        #print('TELAS:      ', app.telas)
+
+        if ultima_tela == 'Info_tela' and tela_atual == 'Mapa_tela':
+            app.root.transition.direction = 'left'                
+            app.root.current = ultima_tela
+        elif ultima_tela == 'Editar_tela' and tela_atual == 'Info_tela':
+            app.root.transition.direction = 'right'                
+            app.root.current = str(app.telas[-4])
+            app.telas = app.telas[:-4]
+        elif tela_atual == 'Menu_tela':
+            app.root.transition.direction = 'left'                
+            app.root.current = ultima_tela
+        else:
+            app.root.transition.direction = 'left'
+            app.root.current = ultima_tela
+            app.root.transition.direction = 'right'
+        # Aqui faz com que o voltar não fique sempre pulando entre as duas ultimas telas
+        if len(app.telas) > 2:
+            try:  
+                if ultima_tela == app.telas[-3]:
+                    app.telas = app.telas[:-2]
+            except IndexError:
+                app.telas = app.telas[:-1]
+        if len(app.telas) == 0:
+            app.telas = ['Menu_tela']
+        #print('FINAL DE VOLTAR', app.telas)
+        #print('+++++++++++++++++++++++++++')
            
     
 MainApp().run()
