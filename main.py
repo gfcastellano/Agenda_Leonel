@@ -70,10 +70,10 @@ class MainApp(MDApp):
                 ultima_tela = str(app.telas[-2])
             except IndexError:
                 ultima_tela = tela_atual
-            print('=========================')
-            print('TELA_ATUAL: ', tela_atual)
-            print('ULTIMA_TELA:', ultima_tela)
-            print('TELAS:      ', app.telas)
+            #print('=========================')
+            #print('TELA_ATUAL: ', tela_atual)
+            #print('ULTIMA_TELA:', ultima_tela)
+            #print('TELAS:      ', app.telas)
 
             if ultima_tela == 'Info_tela' and tela_atual == 'Mapa_tela':
                 app.root.transition.direction = 'left'                
@@ -98,8 +98,8 @@ class MainApp(MDApp):
                     app.telas = app.telas[:-1]
             if len(app.telas) == 0:
                 app.telas = ['Menu_tela']
-            print('FINAL DE VOLTAR', app.telas)
-            print('+++++++++++++++++++++++++++')
+            #print('FINAL DE VOLTAR', app.telas)
+            #print('+++++++++++++++++++++++++++')
         if key == 113: # 113 = q
             app = MDApp.get_running_app()
             print(app.telas)
