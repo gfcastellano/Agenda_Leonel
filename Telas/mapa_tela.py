@@ -1,6 +1,5 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
-from voltar import Voltar
 from Mapa.marcador import Marcador, Marcador_vermelho
 from kivy.core.window import Window
 
