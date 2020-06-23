@@ -25,6 +25,10 @@ class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
     telas = ['Menu_tela']
+    data = {
+        'point-of-sale': 'Vendas',
+        'briefcase': 'Visitas'}
+    
     
     def build(self):
         self.theme_cls.primary_palette = "BlueGray"
@@ -35,6 +39,7 @@ class MainApp(MDApp):
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
+
         
 
     def carregar_clientes(self):
@@ -44,6 +49,56 @@ class MainApp(MDApp):
                 print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except FileNotFoundError:
                 print('clientes.json não achado no diretório')
-                
+
+    def registrar_tela(self):
+        try:        
+            app = MDApp.get_running_app()
+            app.telas.append(str(app.root.current_screen)[14:-2])
+        except AttributeError: #para que no build não dê problemas
+            pass
+
+    def voltar(self,window,key,*args):
+        if key ==27: #27 = esc
+            app = MDApp.get_running_app()            
+            tela_atual = str(app.telas[-1])
+            try:
+                ultima_tela = str(app.telas[-2])
+            except IndexError:
+                ultima_tela = tela_atual
+
+            if ultima_tela == 'Info_tela' and tela_atual == 'Mapa_tela':
+                app.root.transition.direction = 'left'                
+                app.root.current = ultima_tela
+            elif tela_atual == 'Menu_tela':
+                app.root.transition.direction = 'left'                
+                app.root.current = ultima_tela
+            else:
+                app.root.transition.direction = 'left'
+                app.root.current = ultima_tela
+                app.root.transition.direction = 'right'
+            # Aqui faz com que o voltar não fique sempre pulando entre as duas ultimas telas
+            print()
+            try:  
+                if app.telas[-1] == app.telas[-3]:
+                    app.telas = app.telas[:-2]
+            except IndexError:
+                app.telas = app.telas[:-1]
+        return True
+
+        if key == 113: # 113 = q
+            app = MDApp.get_running_app()
+            print(app.telas)
+
+    def voltar_toolbar(self):
+        app = MDApp.get_running_app()
+        app.root.transition.direction = 'left'
+        app.root.current = str(app.telas[-2])
+        app.root.transition.direction = 'right'
+        try:
+            if app.telas[-1] == app.telas[-3]:
+                app.telas = app.telas[:-2]
+        except IndexError:
+            app.telas = app.telas[:-1]
+           
     
 MainApp().run()

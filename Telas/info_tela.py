@@ -7,6 +7,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from urllib import parse
 from kivy.core.clipboard import Clipboard
+from mapview import MapMarkerPopup
 
 
 class Info_tela(Screen):
@@ -14,12 +15,11 @@ class Info_tela(Screen):
     popup_maps=None
 
     def on_pre_enter(self):
+        print('Entrando em Info_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
-        gerenciador = app.root
-        app.telas.append(str(gerenciador.current_screen)[14:-2])
-        Window.bind(on_keyboard=self.voltar)
-        self.apagar_infos()
+        app.registrar_tela()
+        Window.bind(on_keyboard=app.voltar)
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')
@@ -51,12 +51,23 @@ class Info_tela(Screen):
         self.ids.tap_higienico.active = False
     
     def adicionar_infos(self,root):
+        dados=[]
         print('Adicionando infos a Info_tela')
-        nome_fantasia = str(root.ids.nome_fantasia.text)
-        dados=''
-        for cliente in self.dados_clientes:
-            if nome_fantasia == cliente['nome_fantasia']:
-                dados = cliente
+        if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>":
+            nome_fantasia = str(root.ids.nome_fantasia.text)
+            dados=''
+            print('Adicionando informações do cliente:', nome_fantasia)
+            for cliente in self.dados_clientes:
+                if nome_fantasia == cliente['nome_fantasia']:
+                    dados = cliente
+        else:
+            lat = str(root)
+            dados=''
+            print('Adicionando informações do cliente na latitude:', lat)
+            for cliente in self.dados_clientes:
+                if lat == str(cliente['lat']):
+                    dados = cliente
+           
         self.ids.codigo.text        = str(dados['codigo'])
         self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
         self.ids.endereco.text      = str(dados['endereco'])
@@ -91,11 +102,13 @@ class Info_tela(Screen):
         if not self.popup_maps:
             self.popup_maps = MDDialog( size_hint = [0.8,0.8],
                 text="Deseja ir para rotas no Maps?",
-                buttons=[MDRaisedButton(
-                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                buttons=[
+                    MDRaisedButton(
+                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
                     ),
-                    MDLabel(
-                        text='')
+                    MDFlatButton(
+                        text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_maps
+                    )
                 ],
             )
         self.popup_maps.open()
@@ -121,34 +134,23 @@ class Info_tela(Screen):
         print(numero_copiado)
         Clipboard.copy(numero_copiado)
 
-    def fechar_popup_copiar(self,*args):
-        self.cop.dismiss()
+    def fechar_popup_maps(self,*args):
+        self.popup_maps.dismiss()
 
-    def voltar(self,window,key,*args):
-        if key ==27:
-            gerenciador = MDApp.get_running_app().root
-            app = MDApp.get_running_app()
-            gerenciador.transition.direction = 'left'
-            gerenciador.current = str(app.telas[-2])
-            gerenciador.transition.direction = 'right'
-            try:
-                if app.telas[-1] == app.telas[-3]:
-                    app.telas = app.telas[:-2]
-            except IndexError:
-                app.telas = app.telas[:-1]
-            return True
-        if key == 113:
-            app = MDApp.get_running_app()
-            print(app.telas)
-
-    def voltar_toolbar(self):
-        gerenciador = MDApp.get_running_app().root
-        app = MDApp.get_running_app()
-        gerenciador.transition.direction = 'left'
-        gerenciador.current = str(app.telas[-2])
-        gerenciador.transition.direction = 'right'
+    def ir_para_mapa(self):
+        for cliente in self.dados_clientes:
+            if cliente['nome_fantasia'] == self.ids.nome_fantasia.text:
+                dados = cliente
         try:
-            if app.telas[-1] == app.telas[-3]:
-                app.telas = app.telas[:-2]
-        except IndexError:
-            app.telas = app.telas[:-1]
+            lat,lon = dados['lat'], dados['lon']
+            app = MDApp.get_running_app()
+            mapa_tela = app.root.get_screen('Mapa_tela')
+            mapa_tela.ids.mapa.center_on(lat,lon)
+            mapa_tela.ids.mapa.zoom = 16
+            print('Indo para Mapa_tela centralizado em:', self.ids.nome_fantasia.text)
+            app.root.transition.direction = 'right'
+            app.root.current = 'Mapa_tela'
+        except:
+            pass
+        
+

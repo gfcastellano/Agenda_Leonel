@@ -8,19 +8,20 @@
             title: 'Lista de Clientes'
             md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
-            height: 100
+            height: 150
             pos_hint: {'top':1}
             elevation: 11
-            left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
             right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:   
             size_hint_y: None
-            height: 100
+            height: 150
             MDTextField:
                 id: buscar
                 font_size: 40
                 size_hint_x: 4
+                hint_text: 'Pesquisar'
             MDIconButton:
                 text: 'Buscar'
                 on_release: root.apagar_texto() 
@@ -38,27 +39,23 @@
 <Cliente>:
     size_hint_y: None
     height: 100
-    padding: [0,5,0,0]
+    padding: [0,0,0,0]
     MDLabel:
         id: codigo
         halign: 'center'
+        valign: 'bottom'
         size_hint_x: 1
         color: app.theme_cls.primary_dark
     MDLabel:
         id: nome_fantasia
         halign: 'center'
-        size_hint_x: 6
         color: app.theme_cls.primary_dark
+        size_hint_x: 6
     MDIconButton:
         size_hint_x: 2
         icon: 'information-outline'
-        size: self.size
+        size_hint_x: 1
         on_release: 
             root.ir_para_infos(root)
             app.root.transition.direction = 'left'
-    MDIconButton:
-        size_hint_x: 2
-        icon: 'point-of-sale'
-        size: self.size
-                
 
