@@ -109,7 +109,10 @@ class MainApp(MDApp):
     def voltar_toolbar(self):
         app = MDApp.get_running_app()
         app.root.transition.direction = 'left'
-        app.root.current = str(app.telas[-2])
+        if str(app.telas[-2]) == 'Editar_tela':
+            app.root.current = str(app.telas[-4])
+        else:
+            app.root.current = str(app.telas[-2])
         app.root.transition.direction = 'right'
         try:
             if app.telas[-1] == app.telas[-3]:

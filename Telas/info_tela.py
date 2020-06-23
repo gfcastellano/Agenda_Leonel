@@ -54,7 +54,7 @@ class Info_tela(Screen):
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Info_tela')
-        if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>":
+        if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>" or str(root) == "<Screen name='Editar_tela'>":
             nome_fantasia = str(root.ids.nome_fantasia.text)
             dados=''
             print('Adicionando informações do cliente:', nome_fantasia)

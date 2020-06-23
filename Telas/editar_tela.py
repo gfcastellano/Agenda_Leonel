@@ -158,6 +158,7 @@ class Editar_tela(Screen):
         app.popup_leituradados.dismiss()
         app.root.transition.direction = 'right'
         app.root.current = 'Info_tela'
+        app.root.get_screen('Info_tela').adicionar_infos(self)
 
     def error(self,urlrequest, result):
         print('Error')
