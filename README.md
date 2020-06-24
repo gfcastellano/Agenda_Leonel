@@ -13,8 +13,7 @@
 - Adicionar eventos automaticamente na agenda, criar assistete pessoal (Automatização de eventos, ligar, fazer visita, acompanhamento de venda)
 
 ## Código:
-Funcionalidade serão escritas em linguagem .py e design será escrito em "linguagem" .kv (tentaremos, né)
-
+Funcionalidade serão escritas em linguagem .py e design será escrito em "linguagem" .kv
 ## Objetivo:
 Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista de clientes, otimizando sua rotina de visitas.
 
