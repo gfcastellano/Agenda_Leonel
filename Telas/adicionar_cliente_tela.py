@@ -150,7 +150,7 @@ class Adicionar_cliente_tela(Screen):
         if not self.popup_error:
             self.popup_error = MDDialog( size_hint = [0.8,0.8],
                 title= 'ERRO',
-                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas nem o CEP para o endereço digitado.' \
+                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas e o CEP para o endereço digitado.' \
                         ' \n'
                         'Não será possivel colocar um marcador para esse cliente no mapa.'),
                 buttons=[MDRaisedButton(
