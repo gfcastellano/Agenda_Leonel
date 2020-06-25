@@ -17,6 +17,7 @@ class Adicionar_cliente_tela(Screen):
     novo_cliente={}
     popup_error=None
     popup_cnpj=None
+    popup_infos = None
     def on_pre_enter(self):
         print('Entrando em Adicionar_cliente_tela')
         app = MDApp.get_running_app()
@@ -54,47 +55,62 @@ class Adicionar_cliente_tela(Screen):
 
     def adicionar(self):
         novo_cliente={}
+        nome       = self.ids.nome_fantasia.text
+        endereco   = self.ids.endereco.text
+        numero     = self.ids.numero.text
+        bairro     = self.ids.bairro.text
+        cidade     = self.ids.cidade.text
 
-        novo_cliente['codigo']         = self.ids.codigo.text
-        novo_cliente['nome_fantasia']  = self.ids.nome_fantasia.text
-        novo_cliente['endereco']       = self.ids.endereco.text
-        novo_cliente['numero']         = self.ids.numero.text
-        novo_cliente['bairro']         = self.ids.bairro.text
-        novo_cliente['cidade']         = self.ids.cidade.text
-        novo_cliente['telefone_fixo']  = self.ids.telefone_fixo.text
-        novo_cliente['perfil_cliente'] = self.ids.perfil_cliente.text
-        novo_cliente['nome_1']         = self.ids.nome_1.text
-        novo_cliente['telefone_1']     = self.ids.telefone_1.text
-        novo_cliente['tipo_1']         = self.ids.tipo_1.text
-        novo_cliente['nome_2']         = self.ids.nome_2.text
-        novo_cliente['telefone_2']     = self.ids.telefone_2.text
-        novo_cliente['tipo_2']         = self.ids.tipo_2.text
-        novo_cliente['nome_3']         = self.ids.nome_3.text
-        novo_cliente['telefone_3']     = self.ids.telefone_3.text
-        novo_cliente['tipo_3']         = self.ids.tipo_3.text
-        novo_cliente['data']           = str(date.today())
-        novo_cliente['razao_social']   = self.ids.razao_social.text
-        novo_cliente['cnpj']           = self.ids.cnpj.text
-        novo_cliente['cep']            = self.ids.cep.text
+        print('Nome:',nome)
+        print('endereco:',endereco)
+        print('numero:',numero)
+        print('bairro:',bairro)
+        print('cidade:',cidade)
 
-        novo_cliente['banho']          = self.ids.banho.active
-        novo_cliente['tosa']           = self.ids.tosa.active
-        novo_cliente['pet_shop']       = self.ids.pet_shop.active
-        novo_cliente['clinica']        = self.ids.clinica.active
+        if nome == '' or endereco == '' or numero == '' or bairro == '' or cidade == '':
+            self.abrir_popup_infos()
+            print('Entrou no if')
+        else:
+            novo_cliente['codigo']         = self.ids.codigo.text
+            novo_cliente['nome_fantasia']  = self.ids.nome_fantasia.text
+            novo_cliente['endereco']       = self.ids.endereco.text
+            novo_cliente['numero']         = self.ids.numero.text
+            novo_cliente['bairro']         = self.ids.bairro.text
+            novo_cliente['cidade']         = self.ids.cidade.text
+            novo_cliente['telefone_fixo']  = self.ids.telefone_fixo.text
+            novo_cliente['perfil_cliente'] = self.ids.perfil_cliente.text
+            novo_cliente['nome_1']         = self.ids.nome_1.text
+            novo_cliente['telefone_1']     = self.ids.telefone_1.text
+            novo_cliente['tipo_1']         = self.ids.tipo_1.text
+            novo_cliente['nome_2']         = self.ids.nome_2.text
+            novo_cliente['telefone_2']     = self.ids.telefone_2.text
+            novo_cliente['tipo_2']         = self.ids.tipo_2.text
+            novo_cliente['nome_3']         = self.ids.nome_3.text
+            novo_cliente['telefone_3']     = self.ids.telefone_3.text
+            novo_cliente['tipo_3']         = self.ids.tipo_3.text
+            novo_cliente['data']           = str(date.today())
+            novo_cliente['razao_social']   = self.ids.razao_social.text
+            novo_cliente['cnpj']           = self.ids.cnpj.text
+            novo_cliente['cep']            = self.ids.cep.text
 
-        novo_cliente['cliente']        = ''
-        novo_cliente['therapet']       = ''
-        novo_cliente['tesoura']        = ''
-        novo_cliente['tap_higienico']  = ''
+            novo_cliente['banho']          = self.ids.banho.active
+            novo_cliente['tosa']           = self.ids.tosa.active
+            novo_cliente['pet_shop']       = self.ids.pet_shop.active
+            novo_cliente['clinica']        = self.ids.clinica.active
 
-        endereco_completo = novo_cliente['endereco'] + ', ' + novo_cliente['numero'] + ' - ' + novo_cliente['bairro'] + ' - ' + novo_cliente['cidade']
-        endereco = parse.quote(endereco_completo)
-        api_key ='9V2b8ciJf0K3pqhOB2CahsBkpMYuPJKGHhRabS2-iwY'
-        url = 'https://geocode.search.hereapi.com/v1/geocode?q=%s&apiKey=%s'%(endereco,api_key)
-        app = MDApp.get_running_app()
-        app.popup_leituradados.open()
-        self.novo_cliente = novo_cliente
-        req = UrlRequest(url,on_success=self.success, on_error=self.error, on_failure=self.failure)
+            novo_cliente['cliente']        = ''
+            novo_cliente['therapet']       = ''
+            novo_cliente['tesoura']        = ''
+            novo_cliente['tap_higienico']  = ''
+
+            endereco_completo = novo_cliente['endereco'] + ', ' + novo_cliente['numero'] + ' - ' + novo_cliente['bairro'] + ' - ' + novo_cliente['cidade']
+            endereco = parse.quote(endereco_completo)
+            api_key ='9V2b8ciJf0K3pqhOB2CahsBkpMYuPJKGHhRabS2-iwY'
+            url = 'https://geocode.search.hereapi.com/v1/geocode?q=%s&apiKey=%s'%(endereco,api_key)
+            app = MDApp.get_running_app()
+            app.popup_leituradados.open()
+            self.novo_cliente = novo_cliente
+            req = UrlRequest(url,on_success=self.success, on_error=self.error, on_failure=self.failure)
 
 
     def success(self,urlrequest, result):
@@ -176,7 +192,7 @@ class Adicionar_cliente_tela(Screen):
 
     def success_cnpj(self,urlrequest, result):
         print('Tamanho do resultado:', len(result))
-        #pprint(result) # Para auxiliar no debug
+        pprint(result) # Para auxiliar no debug
         if len(result) > 2: # Significa que deu certo
             self.ids.nome_fantasia.text = str(result['fantasia'])
             self.ids.endereco.text      = str(result['logradouro'])
@@ -205,3 +221,26 @@ class Adicionar_cliente_tela(Screen):
     def fechar_cnpj(self,*args):
         self.popup_cnpj.dismiss()
     
+    def abrir_popup_infos(self):
+        if not self.popup_infos:
+            self.popup_infos = MDDialog( size_hint = [0.8,0.8],
+                title= 'ERRO',
+                text = ('Há informações que necessitam ser inseridas.' \
+                        ' \n' 
+                        'Verifique se foram inseridos: \n'
+                        ' - Nome \n' 
+                        ' - Endereço \n' 
+                        ' - Numero \n' 
+                        ' - Bairro \n' 
+                        ' - Cidade'),
+                buttons=[MDRaisedButton(
+                        text="OK", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_info
+                    ),
+                    MDLabel(
+                        text='')
+                ],
+            )
+        self.popup_infos.open()
+
+    def fechar_info(self, *args):
+        self.popup_infos.dismiss()
