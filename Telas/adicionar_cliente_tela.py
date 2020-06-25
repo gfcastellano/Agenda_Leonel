@@ -186,7 +186,9 @@ class Adicionar_cliente_tela(Screen):
 
     def consulta_cnpj(self):
         url = 'https://www.receitaws.com.br/v1/cnpj/'
-        cnpj = self.ids.cnpj.text
+        cnpj = str(self.ids.cnpj.text)
+        cnpj = cnpj.replace(".",'').replace(',','').replace('/','').replace('-','') # Para que fique somente os numeros
+        print(cnpj)
         url_cnpj = url + cnpj
         UrlRequest(url_cnpj, on_success=self.success_cnpj)
 
