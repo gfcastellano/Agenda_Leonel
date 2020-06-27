@@ -26,6 +26,7 @@ class Adicionar_cliente_tela(Screen):
         self.dados_clientes = app.dados_clientes
         self.ids.codigo.text = str(len(self.dados_clientes) + 1)
         self.apagar_infos()
+        self.ids.scroll.scroll_to(self.ids.codigo)
 
     def apagar_infos(self):
         print('Apagando infos da Adicionar_cliente_tela')

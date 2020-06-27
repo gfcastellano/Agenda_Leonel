@@ -24,6 +24,7 @@ class Editar_tela(Screen):
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)        
         self.dados_clientes = app.dados_clientes
+        self.ids.scroll.scroll_to(self.ids.codigo)
         
     
     def adicionar_infos(self,root):
