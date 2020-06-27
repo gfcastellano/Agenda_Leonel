@@ -76,6 +76,11 @@ class Busca_tela(Screen):
                        (str(dicionario[item]).lower() not in str(cliente['nome_2']).lower()) and \
                        (str(dicionario[item]).lower() not in str(cliente['nome_3']).lower()):
                         retirar.append(cliente)
+                elif item == 'perfil':
+                    if (str(dicionario[item]).lower() not in str(cliente['tipo_1']).lower()) and \
+                       (str(dicionario[item]).lower() not in str(cliente['tipo_2']).lower()) and \
+                       (str(dicionario[item]).lower() not in str(cliente['tipo_3']).lower()):
+                        retirar.append(cliente)
                 else:
                     if str(dicionario[item]).lower() not in str(cliente[item]).lower():
                         retirar.append(cliente)
