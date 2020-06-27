@@ -130,12 +130,13 @@
                 BoxparaScroll:
                     MDLabel:
                         text: 'CNPJ:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: cnpj
+                        size_hint_x: 0.35
                     MDIconButton:
                         icon: 'database-search'
                         on_release: root.consulta_cnpj()
+                    MDTextField:
+                        id: cnpj
+                        size_hint_x: 0.9                
                 BoxparaScroll:
                     MDLabel:
                         text: 'CEP:'
