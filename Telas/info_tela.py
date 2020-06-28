@@ -144,7 +144,6 @@ class Info_tela(Screen):
         for cliente in self.dados_clientes:
             if str(cliente['codigo']) == str(self.ids.codigo.text):
                 dados = cliente
-                print(dados['nome_fantasia'])
         try:
             lat,lon = float(dados['lat']), float(dados['lon'])
             app = MDApp.get_running_app()
