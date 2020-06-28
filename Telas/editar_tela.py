@@ -39,8 +39,13 @@ class Editar_tela(Screen):
         self.ids.codigo.text        = str(dados['codigo'])
         self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
         self.ids.endereco.text      = str(dados['endereco'])
+        self.endereco  = str(dados['endereco'])
         self.ids.numero.text        = str(dados['numero'])
+        self.numero    = str(dados['numero'])
         self.ids.bairro.text        = str(dados['bairro'])
+        self.bairro    = str(dados['bairro'])
+        self.ids.cidade.text        = str(dados['cidade'])
+        self.cidade    = str(dados['cidade'])
         self.ids.telefone_fixo.text = str(dados['telefone_fixo'])
         self.ids.perfil_cliente.text= str(dados['perfil_cliente'])
         self.ids.nome_1.text        = str(dados['nome_1'])
@@ -120,15 +125,36 @@ class Editar_tela(Screen):
         novo_cliente['tesoura']        = ''
         novo_cliente['tap_higienico']  = ''
 
-        endereco_completo = novo_cliente['endereco'] + ', ' + novo_cliente['numero'] + ' - ' + novo_cliente['bairro'] + ' - ' + novo_cliente['cidade']
-        endereco = parse.quote(endereco_completo)
-        api_key ='9V2b8ciJf0K3pqhOB2CahsBkpMYuPJKGHhRabS2-iwY'
-        url = 'https://geocode.search.hereapi.com/v1/geocode?q=%s&apiKey=%s'%(endereco,api_key)
-        app = MDApp.get_running_app()
-        app.popup_leituradados.open()
+        
         self.novo_cliente = novo_cliente
-        req = UrlRequest(url,on_success=self.success, on_error=self.error, on_failure=self.failure)
 
+        if str(novo_cliente['endereco']) != str(self.endereco) or \
+           str(novo_cliente['numero'])   != str(self.numero) or \
+           str(novo_cliente['bairro'])   != str(self.bairro) or \
+           str(novo_cliente['cidade'])   != str(self.cidade):
+
+            endereco_completo = novo_cliente['endereco'] + ', ' + novo_cliente['numero'] + ' - ' + novo_cliente['bairro'] + ' - ' + novo_cliente['cidade']
+            endereco = parse.quote(endereco_completo)
+            api_key ='9V2b8ciJf0K3pqhOB2CahsBkpMYuPJKGHhRabS2-iwY'
+            url = 'https://geocode.search.hereapi.com/v1/geocode?q=%s&apiKey=%s'%(endereco,api_key)
+            app = MDApp.get_running_app()
+            app.popup_leituradados.open()
+            req = UrlRequest(url,on_success=self.success, on_error=self.error, on_failure=self.failure)
+
+        else:
+            print('Não procurou por novo endereço')
+            
+            index = int(self.novo_cliente['codigo']) - 1
+
+            self.dados_clientes[index] = self.novo_cliente
+            with open('clientes.json', 'w') as data:
+                json.dump(self.dados_clientes,data)
+
+            app = MDApp.get_running_app()
+            app.popup_leituradados.dismiss()
+            app.root.transition.direction = 'right'
+            app.root.current = 'Info_tela'
+            app.root.get_screen('Info_tela').adicionar_infos(self)
 
     def success(self,urlrequest, result):
         print('Success')

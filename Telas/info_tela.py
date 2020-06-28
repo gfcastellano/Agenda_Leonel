@@ -67,6 +67,7 @@ class Info_tela(Screen):
             dados=''
             print('Adicionando informações do cliente na latitude:', lat)
             for cliente in self.dados_clientes:
+                print(cliente['codigo'],cliente['nome_fantasia'],cliente['lat'])
                 if lat == str(cliente['lat']):
                     dados = cliente
            
