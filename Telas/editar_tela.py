@@ -30,10 +30,10 @@ class Editar_tela(Screen):
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Editar_tela')
-        nome_fantasia = str(root.ids.nome_fantasia.text)        
-        print('Adicionando informações do cliente:', nome_fantasia)
+        codigo = str(root.ids.codigo.text)        
+        print('Adicionando informações do cliente:', codigo)
         for cliente in self.dados_clientes:
-            if nome_fantasia == cliente['nome_fantasia']:
+            if codigo == str(cliente['codigo']):
                 dados = cliente
            
         self.ids.codigo.text        = str(dados['codigo'])

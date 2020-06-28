@@ -56,11 +56,11 @@ class Info_tela(Screen):
         dados=[]
         print('Adicionando infos a Info_tela')
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>" or str(root) == "<Screen name='Editar_tela'>":
-            nome_fantasia = str(root.ids.nome_fantasia.text)
+            codigo = str(root.ids.codigo.text)
             dados=''
-            print('Adicionando informações do cliente:', nome_fantasia)
+            print('Adicionando informações do cliente:', codigo)
             for cliente in self.dados_clientes:
-                if nome_fantasia == cliente['nome_fantasia']:
+                if codigo == str(cliente['codigo']):
                     dados = cliente
         else:
             lat = str(root)
@@ -69,6 +69,7 @@ class Info_tela(Screen):
             for cliente in self.dados_clientes:
                 if lat == str(cliente['lat']):
                     dados = cliente
+                    print('Cliente:', dados['nome_fantasia'])
            
         self.ids.codigo.text        = str(dados['codigo'])
         self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
@@ -141,10 +142,11 @@ class Info_tela(Screen):
 
     def ir_para_mapa(self):
         for cliente in self.dados_clientes:
-            if cliente['nome_fantasia'] == self.ids.nome_fantasia.text:
+            if str(cliente['codigo']) == str(self.ids.codigo.text):
                 dados = cliente
+                print(dados['nome_fantasia'])
         try:
-            lat,lon = dados['lat'], dados['lon']
+            lat,lon = float(dados['lat']), float(dados['lon'])
             app = MDApp.get_running_app()
             mapa_tela = app.root.get_screen('Mapa_tela')
             mapa_tela.ids.mapa.center_on(lat,lon)
