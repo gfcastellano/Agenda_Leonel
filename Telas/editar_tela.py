@@ -60,6 +60,8 @@ class Editar_tela(Screen):
         self.ids.razao_social.text  = str(dados['razao_social'])
         self.ids.cnpj.text          = str(dados['cnpj'])
         self.ids.cep.text           = str(dados['cep'])
+        self.lat                    = str(dados['lat'])
+        self.lon                    = str(dados['lon'])
 
         x = (lambda a: True if a == 'True' else False)
 
@@ -115,6 +117,9 @@ class Editar_tela(Screen):
         novo_cliente['cnpj']           = self.ids.cnpj.text
         novo_cliente['cep']            = self.ids.cep.text
 
+        novo_cliente['lat']           = self.lat
+        novo_cliente['lon']           = self.lon
+
         novo_cliente['banho']          = self.ids.banho.active
         novo_cliente['tosa']           = self.ids.tosa.active
         novo_cliente['pet_shop']       = self.ids.pet_shop.active
@@ -143,7 +148,7 @@ class Editar_tela(Screen):
 
         else:
             print('Não procurou por novo endereço')
-            
+
             index = int(self.novo_cliente['codigo']) - 1
 
             self.dados_clientes[index] = self.novo_cliente

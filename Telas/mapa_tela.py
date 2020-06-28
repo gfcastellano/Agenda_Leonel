@@ -24,15 +24,15 @@ class Mapa_tela(Screen):
 
     def adicionar_marcadores(self,dados_cliente):
         print('Adicionando marcadores no Mapa')
-        for cliente in self.dados_clientes:
+        for cliente in self.dados_clientes:            
             try:
-                nome_fantasia, lat, lon = cliente['nome_fantasia'],cliente['lat'],cliente['lon']
+                nome_fantasia, lat, lon = cliente['nome_fantasia'],cliente['lat'],cliente['lon']    
                 if nome_fantasia not in self.lista_de_marcadores:
                     self.ids.mapa.add_widget(Marcador(lat=lat,lon=lon)) #adiciona marcador
                     self.lista_de_marcadores.append(nome_fantasia) #adiciona nome a lista
             except:
-                self.lista_sem_marcadores.append(nome_fantasia)
-                continue
+                self.lista_sem_marcadores.append(cliente['nome_fantasia'])
+                
         print('[AVISO]','Não foi possivel adicionar marcadores para {} clientes:'.format(len(self.lista_sem_marcadores)))
         print('[AVISO]',self.lista_sem_marcadores)
         
