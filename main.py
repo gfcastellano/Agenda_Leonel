@@ -45,6 +45,7 @@ class MainApp(MDApp):
 
     def carregar_clientes(self):
         self.path = MDApp.get_running_app().user_data_dir + '/'
+        print(self.path)
         try:
             with open(self.path + 'clientes.json', 'r') as file:
                 self.dados_clientes = json.load(file)
@@ -52,11 +53,10 @@ class MainApp(MDApp):
         except FileNotFoundError:
             try:
                 with open('clientes.json', 'r') as file:
-                self.dados_clientes = json.load(file)
-                print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
+                    self.dados_clientes = json.load(file)
+                    print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except:
-                pass
-            print('clientes.json não achado no diretório')
+                print('clientes.json não achado no diretório')
 
     def registrar_tela(self):
         try:        
