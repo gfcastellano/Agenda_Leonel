@@ -46,7 +46,7 @@ class MainApp(MDApp):
     def carregar_clientes(self):
         self.path = MDApp.get_running_app().user_data_dir + '/'
         try:
-            with open('clientes.json', 'r') as file:
+            with open(self.path + 'clientes.json', 'r') as file:
                 self.dados_clientes = json.load(file)
                 print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
         except FileNotFoundError:
