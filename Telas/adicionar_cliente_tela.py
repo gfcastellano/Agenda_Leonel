@@ -137,7 +137,8 @@ class Adicionar_cliente_tela(Screen):
                 self.abrir_popup_error()
 
         self.dados_clientes.append(self.novo_cliente)
-        with open('clientes.json', 'w') as data:
+        app = MDApp.get_running_app()
+        with open(app.path + 'clientes.json', 'w') as data:
             json.dump(self.dados_clientes,data)
 
         app = MDApp.get_running_app()
@@ -153,7 +154,8 @@ class Adicionar_cliente_tela(Screen):
         
 
         self.dados_clientes.append(self.novo_cliente)
-        with open('clientes.json', 'w') as data:
+        app = MDApp.get_running_app()
+        with open(app.path + 'clientes.json', 'w') as data:
             json.dump(self.dados_clientes,data)
 
         

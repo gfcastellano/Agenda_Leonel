@@ -152,7 +152,8 @@ class Editar_tela(Screen):
             index = int(self.novo_cliente['codigo']) - 1
 
             self.dados_clientes[index] = self.novo_cliente
-            with open('clientes.json', 'w') as data:
+            app = MDApp.get_running_app()
+            with open(app.path + 'clientes.json', 'w') as data:
                 json.dump(self.dados_clientes,data)
 
             app = MDApp.get_running_app()
@@ -183,7 +184,8 @@ class Editar_tela(Screen):
         index = int(self.novo_cliente['codigo']) - 1
 
         self.dados_clientes[index] = self.novo_cliente
-        with open('clientes.json', 'w') as data:
+        app = MDApp.get_running_app()
+        with open(app.path + 'clientes.json', 'w') as data:
             json.dump(self.dados_clientes,data)
 
         app = MDApp.get_running_app()
@@ -201,7 +203,8 @@ class Editar_tela(Screen):
         index = int(self.novo_cliente['codigo']) - 1
 
         self.dados_clientes[index] = self.novo_cliente
-        with open('clientes.json', 'w') as data:
+        app = MDApp.get_running_app()
+        with open(app.path + 'clientes.json', 'w') as data:
             json.dump(self.dados_clientes,data)
 
         
