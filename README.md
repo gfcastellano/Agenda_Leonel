@@ -32,6 +32,7 @@ Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista 
 
 Primeiro é necessário uma maquina com sistema oeracional linux podendo ser uma maquina virtual.
 Nela você deverá executar no terminal:
+
     sudo apt-get install git
     git clone https://github.com/kivy/buildozer.git
     sudo apt-get install python3.6
