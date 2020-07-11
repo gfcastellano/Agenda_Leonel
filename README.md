@@ -26,3 +26,34 @@ Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista 
     - métricas para produtos (rendimento, custo para cliente, etc)
     - métricas para clientes (quando compra, qual a quantia mais apropriada, qual a sazonalidade)
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
+
+
+# Primeiros passos para instalar em seu celular Android
+
+Primeiro é necessário uma maquina com sistema oeracional linux podendo ser uma maquina virtual.
+Nela você deverá executar no terminal:
+    sudo apt-get install git
+    git clone https://github.com/kivy/buildozer.git
+    sudo apt-get install python3.6
+    sudo apt-get install python3-setuptools
+    
+    cd buildozer
+    sudo python3 setup.py install
+    cd ..
+    
+    git clone https://github.com/gfcastellano/Agenda_Leonel.git
+    sudo apt install -y git zip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev
+    pip3 install --user --upgrade cython virtualenv
+    sudo apt-get install cython
+    sudo apt install libssl-dev
+    
+    cd Agenda_Leonel
+    ###########################################
+    #Caso queira pode testar diferentes branchs
+    git checkout visitas
+    ###########################################
+    
+    buildozer android debug deploy run logcat
+    
+    
+    
