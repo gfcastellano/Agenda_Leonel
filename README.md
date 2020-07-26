@@ -55,10 +55,10 @@ Nela você deverá executar no terminal:
     sudo apt install libssl-dev
     
     cd Agenda_Leonel
-    ###########################################
+    
     #Caso queira pode testar diferentes branchs
-    git checkout <nome_do_branch>
-    ###########################################
+    #git checkout <nome_do_branch>
+    
     
     buildozer android debug deploy run logcat
     
