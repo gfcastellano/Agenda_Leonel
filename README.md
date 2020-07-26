@@ -7,8 +7,8 @@
 
 ✅| Realizar buscas avançadas por caracteristicas especificas de clientes
 - Adicionar lembretes
-✅| Adicionar eventos de contato/visitas comercial (agenda)
 
+✅| Adicionar eventos de contato/visitas comercial (agenda)
 - Gerenciar estoques de produtos
 - Emitir relatórios e métricas de eficiencia de contatos comerciais (melhor dia e horario para contato, sugestão de produtos, etc) 
 - Adicionar eventos automaticamente na agenda, criar assistete pessoal (Automatização de eventos, ligar, fazer visita, acompanhamento de venda)
