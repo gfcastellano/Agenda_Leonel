@@ -51,7 +51,7 @@ Nela você deverá executar no terminal:
     cd Agenda_Leonel
     ###########################################
     #Caso queira pode testar diferentes branchs
-    git checkout visitas
+    git checkout <nome_do_branch>
     ###########################################
     
     buildozer android debug deploy run logcat
