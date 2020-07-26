@@ -1,4 +1,4 @@
-# Aplicativo EM PROCESSO DE DESENVOLVIMENTO, QUE SERÁ criado usando a biblioteca Kivy para python.
+# Aplicativo criado usando a biblioteca Kivy para python. ( EM PROCESSO DE DESENVOLVIMENTO )
 
 ## Uso/Aplicações:
 ✅| Visualizar, adicionar e editar lista de contatos comerciais
@@ -31,7 +31,9 @@ Auxiliar profissionais que trabalham com vendas diretas a gerenciarem sua lista 
 
 # Primeiros passos para instalar em seu celular Android
 
-Primeiro é necessário uma maquina com sistema oeracional linux podendo ser uma maquina virtual.
+Primeiro é necessário uma máquina com sistema operacional Linux®.
+Caso você não possua podendo ser uma máquina virtual instalada em seu PC Windows®.
+Também é preciso habilitar o modo desenvolvedor de seu Android®.
 Nela você deverá executar no terminal:
 
     sudo apt-get install git
