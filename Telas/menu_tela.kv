@@ -24,7 +24,7 @@
                 app.root.transition.direction = 'left'
                 app.root.current = 'Clientes_tela'
         MDRaisedButton:
-            text: 'Busca Avancada'
+            text: 'Busca Avançada'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Busca_tela'
@@ -35,6 +35,11 @@
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Adicionar_cliente_tela'
+        MDRaisedButton:
+            text: 'Visitas'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Visitas_tela'
         MDRaisedButton:
             text: 'Sair'
             on_release: app.stop()

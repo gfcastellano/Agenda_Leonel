@@ -1,0 +1,166 @@
+<Visitas_tela>:
+    BoxLayout:
+        orientation:'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Visitas'
+            md_bg_color: app.theme_cls.primary_dark
+            size_hint_y: None
+            height: 150
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["card-search", lambda x: root.mostrar_popup()]]
+#----------------------------------------CAIXA DE BUSCA
+        BoxLayout:  
+			orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+			BoxLayout:
+            	size_hint_y: None
+            	height: self.minimum_height + 15
+            	MDTextField:
+                	id: buscar
+                	font_size: 40
+                	size_hint_x: 4
+                	hint_text: 'Pesquisar'
+            	MDIconButton:
+                	text: 'Buscar'
+                	on_release: root.apagar_texto() 
+                	icon: 'backspace'
+			BoxLayout:
+            	size_hint_y: None
+            	height: self.minimum_height
+				MDIconButton:
+					icon: 'calendar'
+                    on_release: root.abrir_popup_primeira_data()
+                MDLabel:
+                    id: data	
+                    halign: 'center'
+				MDIconButton:
+					text: 'Escolher data'
+					icon: 'backspace'	
+                    on_release: root.apagar_data() 
+#---------------------------------------LISTA DE CLIENTES
+        ScrollView:
+            id: scroll
+            BoxLayout:
+                id: box_scroll
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+    MDFloatingActionButton:
+        icon: 'card-plus-outline'
+        md_bg_color: app.theme_cls.primary_dark
+        rotation_root_button: True
+        pos_hint: {"center_x": .9, "center_y": .1}
+        on_release: 
+            app.root.transition.direction = 'left'
+            root.ir_para_visita_tela()
+
+<Visita>:
+    size_hint_y: None
+    height: self.minimum_height
+    orientation: 'vertical'
+    on_release: self.abrir_visita(self)
+    GridLayout:
+        rows: 4
+        cols: 2
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        padding: 30
+        MDLabel:
+            id: data
+            halign: 'left'
+            valign: 'bottom'
+            size_hint_x: 3
+            color: app.theme_cls.primary_dark
+            bold: True
+        MDLabel:
+            id: nome_fantasia
+            halign: 'left'
+            size_hint_x: 6
+            color: app.theme_cls.primary_dark
+            bold: True
+        MDLabel:
+            text: 'Contato:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: contato
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'
+        MDLabel:
+            text: 'Visita:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: visita
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'        
+        MDLabel:
+            text: 'Informações:'
+            halign:'left'
+            valign: 'top'
+            size_hint_y: None
+            bold: True        
+        MDLabel:
+            id: informacoes
+            halign:'left'
+            multiline: True
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+
+    MDSeparator:
+        height: "10dp"
+
+
+<Content>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: "200dp"
+    BoxLayout:
+        MDLabel:
+            text: ' Data:'
+        MDTextField:
+            size_hint_x:2
+    BoxLayout:
+        MDLabel:
+            text: ' Cliente:'
+        MDTextField:
+            text: 'Nome Fantasia'
+            size_hint_x:2
+    BoxLayout:
+        MDLabel:
+            text: 'Contato:'
+            halign: 'center'
+        MDLabel:
+            text: 'Telefone:'
+            halign: 'center'
+        MDLabel:
+            text: 'Tipo:'
+            halign: 'center'
+    BoxLayout:
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+    BoxLayout:
+        MDLabel:
+            text: " Visita:"
+            size_hint_x: None
+        MDTextField:
+            #size_hint_x: 2

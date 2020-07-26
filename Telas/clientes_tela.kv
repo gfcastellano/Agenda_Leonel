@@ -16,7 +16,7 @@
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:   
             size_hint_y: None
-            height: 150
+            height: self.minimum_height + 15
             MDTextField:
                 id: buscar
                 font_size: 40
@@ -28,6 +28,7 @@
                 icon: 'backspace' 
 #---------------------------------------LISTA DE CLIENTES
         ScrollView:   
+            id: scroll
             BoxLayout:
                 id: box_scroll
                 orientation: 'vertical'
@@ -50,10 +51,16 @@
         id: nome_fantasia
         halign: 'center'
         color: app.theme_cls.primary_dark
-        size_hint_x: 6
+        size_hint_x: 4
+    MDLabel:
+        id: bairro
+        halign: 'center'
+        color: app.theme_cls.primary_dark
+        size_hint_x: 2
     MDIconButton:
         size_hint_x: 2
         icon: 'information-outline'
+        pos_hint: {'center_y':0.5}
         size_hint_x: 1
         on_release: 
             root.ir_para_infos(root)

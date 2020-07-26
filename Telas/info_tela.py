@@ -8,12 +8,20 @@ from kivymd.uix.label import MDLabel
 from urllib import parse
 from kivy.core.clipboard import Clipboard
 from mapview import MapMarkerPopup
+from kivy.clock import Clock
+from kivymd.uix.tab import MDTabsBase
+from kivy.uix.floatlayout import FloatLayout
+
+
+class Tab(FloatLayout, MDTabsBase):
+    pass
 
 
 class Info_tela(Screen):
     dados_clientes=[]
     popup_maps=None
     popup_editar=None
+    data={'card-plus-outline': 'Adicionar visita'}
 
     def on_pre_enter(self):
         print('Entrando em Info_tela')
@@ -21,7 +29,7 @@ class Info_tela(Screen):
         self.dados_clientes = app.dados_clientes
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)
-        self.ids.scroll.scroll_to(self.ids.codigo)
+        self.ids.info_tab.ids.scroll_info.scroll_y = 1
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')
@@ -55,6 +63,8 @@ class Info_tela(Screen):
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Info_tela')
+
+        #Identificar cliente
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>" or str(root) == "<Screen name='Editar_tela'>":
             codigo = str(root.ids.codigo.text)
             dados=''
@@ -64,42 +74,77 @@ class Info_tela(Screen):
                     dados = cliente
         else:
             lat = str(root)
-            dados=''
-            print('Adicionando informações do cliente na latitude:', lat)
-            for cliente in self.dados_clientes:
-                if lat == str(cliente['lat']):
-                    dados = cliente
-                    print('Cliente:', dados['nome_fantasia'])
-           
-        self.ids.codigo.text        = str(dados['codigo'])
-        self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
-        self.ids.endereco.text      = str(dados['endereco'])
-        self.ids.numero.text        = str(dados['numero'])
-        self.ids.bairro.text        = str(dados['bairro'])
-        self.ids.telefone_fixo.text = str(dados['telefone_fixo'])
-        self.ids.perfil_cliente.text= str(dados['perfil_cliente'])
-        self.ids.nome_1.text        = str(dados['nome_1'])
-        self.ids.telefone_1.text    = str(dados['telefone_1'])
-        self.ids.tipo_1.text        = str(dados['tipo_1'])
-        self.ids.nome_2.text        = str(dados['nome_2'])
-        self.ids.telefone_2.text    = str(dados['telefone_2'])
-        self.ids.tipo_2.text        = str(dados['tipo_2'])
-        self.ids.nome_3.text        = str(dados['nome_3'])
-        self.ids.telefone_3.text    = str(dados['telefone_3'])
-        self.ids.tipo_3.text        = str(dados['tipo_3'])
-        self.ids.razao_social.text  = str(dados['razao_social'])
-        self.ids.cnpj.text          = str(dados['cnpj'])
-        self.ids.cep.text           = str(dados['cep'])
+            print('Tamanho de root:',len(str(root)))
+            if len(str(root)) > 11:
+                for i in range(0,20):
+                    print('tamanho i:',i)
+                    retirar = len(str(root)) - 11 - i
+                    print('tamanho retirar:',retirar)
+                    lat = str(root)[:-retirar]
+                    print('Tamanho de lat:',len(lat))
+                    dados=''
+                    print('Adicionando informações do cliente na latitude:', lat)
+                    for cliente in self.dados_clientes:
+                        if str(cliente['lat']) == lat:
+                            dados = cliente
+                            print('Cliente:', dados['nome_fantasia'])
+                    if dados == '':
+                        print('Não houve match nos dados')
+                        continue
+                    else:
+                        break
+            else:
+                dados=''
+                print('Adicionando informações do cliente na latitude:', lat)
+                for cliente in self.dados_clientes:
+                    if str(cliente['lat']) == lat:
+                        dados = cliente
+                        print('Cliente:', dados['nome_fantasia'])
+
+        #Preencher informações no info_tab
+
+        info_tab = self.ids.info_tab  
+        info_tab.ids.codigo.text        = str(dados['codigo'])
+        info_tab.ids.nome_fantasia.text = str(dados['nome_fantasia'])
+        info_tab.ids.endereco.text      = str(dados['endereco'])
+        info_tab.ids.numero.text        = str(dados['numero'])
+        info_tab.ids.bairro.text        = str(dados['bairro'])
+        info_tab.ids.telefone_fixo.text = str(dados['telefone_fixo'])
+        info_tab.ids.perfil_cliente.text= str(dados['perfil_cliente'])
+        info_tab.ids.nome_1.text        = str(dados['nome_1'])
+        info_tab.ids.telefone_1.text    = str(dados['telefone_1'])
+        info_tab.ids.tipo_1.text        = str(dados['tipo_1'])
+        info_tab.ids.nome_2.text        = str(dados['nome_2'])
+        info_tab.ids.telefone_2.text    = str(dados['telefone_2'])
+        info_tab.ids.tipo_2.text        = str(dados['tipo_2'])
+        info_tab.ids.nome_3.text        = str(dados['nome_3'])
+        info_tab.ids.telefone_3.text    = str(dados['telefone_3'])
+        info_tab.ids.tipo_3.text        = str(dados['tipo_3'])
+        info_tab.ids.razao_social.text  = str(dados['razao_social'])
+        info_tab.ids.cnpj.text          = str(dados['cnpj'])
+        info_tab.ids.cep.text           = str(dados['cep'])
 
         x = (lambda a: 'Sim' if a == 'True' else '')
 
-        self.ids.therapet.text    = x(str(dados['therapet']))
-        self.ids.tesoura.text     = x(str(dados['tesoura']))
-        self.ids.tap_higienico.text = x(str(dados['tap_higienico']))
-        self.ids.banho.text       = x(str(dados['banho']))
-        self.ids.tosa.text        = x(str(dados['tosa']))
-        self.ids.pet_shop.text    = x(str(dados['pet_shop']))
-        self.ids.clinica.text     = x(str(dados['clinica']))
+        info_tab.ids.therapet.text    = x(str(dados['therapet']))
+        info_tab.ids.tesoura.text     = x(str(dados['tesoura']))
+        info_tab.ids.tap_higienico.text = x(str(dados['tap_higienico']))
+        info_tab.ids.banho.text       = x(str(dados['banho']))
+        info_tab.ids.tosa.text        = x(str(dados['tosa']))
+        info_tab.ids.pet_shop.text    = x(str(dados['pet_shop']))
+        info_tab.ids.clinica.text     = x(str(dados['clinica']))
+
+        #Adidionando informações no visitas_tab
+        
+        visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
+        visitas_tela.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+        self.ids.visitas_tab.ids.data.text = visitas_tela.ids.data.text
+        visitas_tela.buscar()
+
+        self.ids.visitas_tab.ids.scroll_visitas.children = visitas_tela.ids.scroll.children
+
+
+
 
     def abrir_popup_maps(self):    
         if not self.popup_maps:
@@ -107,7 +152,7 @@ class Info_tela(Screen):
                 text="Deseja ir para rotas no Maps?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                        text="Sim", text_color=MDApp.get_running_app().theme_cls.text_color, on_release = self.abrir_maps
                     ),
                     MDFlatButton(
                         text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_maps
@@ -119,9 +164,9 @@ class Info_tela(Screen):
     def abrir_maps(self,*args):
         import webbrowser
         print('Abrindo Google Maps')
-        endereco = self.ids.endereco.text
-        numero = self.ids.numero.text
-        bairro = self.ids.bairro.text
+        endereco = self.ids.info_tab.ids.endereco.text
+        numero = self.ids.info_tab.ids.numero.text
+        bairro = self.ids.info_tab.ids.bairro.text
         endereco_completo = endereco + ', ' + numero + ' - ' + bairro
         print(endereco_completo)
         endereco_completo = parse.quote(endereco_completo)
@@ -142,15 +187,16 @@ class Info_tela(Screen):
 
     def ir_para_mapa(self):
         for cliente in self.dados_clientes:
-            if str(cliente['codigo']) == str(self.ids.codigo.text):
+            if str(cliente['codigo']) == str(self.ids.info_tab.ids.codigo.text):
                 dados = cliente
+                print('Achou:', cliente['nome_fantasia'])
         try:
             lat,lon = float(dados['lat']), float(dados['lon'])
             app = MDApp.get_running_app()
             mapa_tela = app.root.get_screen('Mapa_tela')
             mapa_tela.ids.mapa.center_on(lat,lon)
             mapa_tela.ids.mapa.zoom = 16
-            print('Indo para Mapa_tela centralizado em:', self.ids.nome_fantasia.text)
+            print('Indo para Mapa_tela centralizado em:', dados['nome_fantasia'])
             app.root.transition.direction = 'right'
             app.root.current = 'Mapa_tela'
         except:
@@ -163,7 +209,7 @@ class Info_tela(Screen):
                 text="Deseja editar as informações desse cliente?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=app.theme_cls.accent_dark, on_release = self.ir_para_Editar_tela
+                        text="Sim", text_color=app.theme_cls.text_color, on_release = self.ir_para_Editar_tela
                     ),
                     MDFlatButton(
                         text="Não", text_color=app.theme_cls.primary_color, on_release = self.fechar_popup_editar
@@ -182,5 +228,26 @@ class Info_tela(Screen):
     
     def fechar_popup_editar(self,*args):
         self.popup_editar.dismiss()
+
+
+
+    def callback(self, instance):
+        if instance.icon == 'briefcase':
+            app = MDApp.get_running_app()
+            app.popup_leituradados.open()
+            Clock.schedule_once(self.abrir_visitas,0.1)
+        if instance.icon == 'point-of-sale':
+            pass
+           
+    def abrir_visitas(self,*args):
+        print('Executando abrir_visitas em info_tela')
+        app = MDApp.get_running_app()
+        info_tela = app.root.get_screen('Info_tela')
+        visitas_tela = app.root.get_screen('Visitas_tela')
+        app.root.transition.direction = 'left'
+        app.root.current = 'Visitas_tela'
+        visitas_tela.ids.buscar.text = info_tela.ids.nome_fantasia.text
+        visitas_tela.ids.data.text = ''  
+        visitas_tela.mostrar_popup()
         
 

@@ -3,15 +3,21 @@ Screen:
         orientation: 'vertical'
 #---------------------------------------HEADER
         MDToolbar:
-            title: 'Editar Cliente'
-            md_bg_color: app.theme_cls.error_color
+            title: 'Informacoes'
+            md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
             height: 150
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
-            right_action_items: [["account-edit-outline", lambda x: root.abrir_popup_certeza()]]
+            right_action_items: [["map-marker", lambda x: root.ir_para_mapa()],["dots-vertical", lambda x: root.editar()]]
+		MDTabs:
+    		Tab:
+        		text: "Tab 1"
+       	 Tab:
+            	text: "Tab 1"
         ScrollView:
+            id: scroll
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
@@ -21,82 +27,105 @@ Screen:
                     MDLabel:
                         text: 'Codigo:'
                         size_hint_x: 0.5
+                        halign: 'center'
                     MDLabel:
                         id: codigo
-                        bold: True
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'Nome:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: nome_fantasia
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'Endereco:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    ClickMDLabel:
                         id: endereco
+                        on_release: root.abrir_popup_maps()
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'Numero:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: numero
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'Bairro:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: bairro
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
-                        text: 'Cidade:'
+                        text: 'Telefone Fixo:'
                         size_hint_x: 0.5
-                    MDTextField:
-                        id: cidade
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Telefone:'
-                        size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    ClickMDLabel:
                         id: telefone_fixo
-				BoxparaScroll:
+                        halign: 'center'
+                        on_release: root.copiar(self)
+                BoxparaScroll:
                     MDLabel:
                         text: 'Perfil:'
                         size_hint_x: 0.5
-                    MDTextField:
-                        id: perfil_cliente					
+                        halign: 'center'
+                    MDLabel:
+                        id: perfil_cliente
+                        halign: 'center'
+#-----------------------------------------------------------------CONTATOS
                 BoxparaScroll:
                     MDLabel:
-                        text: 'Contato'
+                        text: 'CONTATOS'
                         halign: 'center'
-                    MDLabel:
-                        text: 'Telefone'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tipo'
-                        halign: 'center'
+                        bold: True
                 BoxparaScroll:
-                    MDTextField:
+                    MDLabel:
                         id: nome_1
-                    MDTextField:
+                        halign: 'center'
+                    ClickMDLabel:
                         id: telefone_1
-                    MDTextField:
+                        halign: 'center'
+                        on_release: root.copiar(self)
+                    MDLabel:
                         id: tipo_1
-				BoxparaScroll:
-                    MDTextField:
+                        halign: 'center'
+                BoxparaScroll:
+                    MDLabel:
                         id: nome_2
-                    MDTextField:
+                        halign: 'center'
+                    ClickMDLabel:
                         id: telefone_2
-                    MDTextField:
+                        halign: 'center'
+                        on_release: root.copiar(self)
+                    MDLabel:
                         id: tipo_2
-				BoxparaScroll:
-                    MDTextField:
+                        halign: 'center'
+                BoxparaScroll:
+                    MDLabel:
                         id: nome_3
-                    MDTextField:
+                        halign: 'center'
+                    ClickMDLabel:
                         id: telefone_3
-                    MDTextField:
+                        halign: 'center'
+                        on_release: root.copiar(self)
+                    MDLabel:
                         id: tipo_3
+                        halign: 'center'
+#-----------------------------------------SERVICOS
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'SERVICOS'
+                        halign: 'center'
+                        bold: True
                 BoxparaScroll:
                     MDLabel:
                         text: 'Banho:'
@@ -111,35 +140,77 @@ Screen:
                         text: 'Clinica:'
                         halign: 'center'
                 BoxparaScroll:
-                    MDCheckbox:
+                    MDLabel:
                         id: banho
-                    MDCheckbox:
+                        halign: 'center'
+                    MDLabel:
                         id: tosa
-                    MDCheckbox:
+                        halign: 'center'
+                    MDLabel:
                         id: pet_shop
-                    MDCheckbox:
+                        halign: 'center'
+                    MDLabel:
                         id: clinica
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'Razao Social:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: razao_social
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'CNPJ:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: cnpj
+                        halign: 'center'
                 BoxparaScroll:
                     MDLabel:
                         text: 'CEP:'
                         size_hint_x: 0.5
-                    MDTextField:
+                        halign: 'center'
+                    MDLabel:
                         id: cep
+                        halign: 'center'
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Therapet:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tesoura:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tapetinho:'
+                        halign: 'center'
+                BoxparaScroll:
+                    MDLabel:
+                        id: therapet
+                        halign: 'center'                        
+                    MDLabel:
+                        id: tesoura
+                        halign: 'center'
+                    MDLabel:
+                        id: tap_higienico
+                        halign: 'center'
+    
 
 
 <BoxparaScroll@BoxLayout>:
     padding: [5,0,0,0]
     size_hint_y: None
     height: 120
+
+
+<ClickMDLabel@ButtonBehavior+MDLabel>
+    color: app.theme_cls.primary_color
+
+<Tab>:
+	MDIconButton:
+        id: icon
+        icon: app.icons[0]
+        user_font_size: "48sp"
+        pos_hint: {"center_x": .5, "center_y": .5}

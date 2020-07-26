@@ -24,13 +24,13 @@ class Editar_tela(Screen):
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)        
         self.dados_clientes = app.dados_clientes
-        self.ids.scroll.scroll_to(self.ids.codigo)
+        self.ids.scroll.scroll_y = 1
         
     
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Editar_tela')
-        codigo = str(root.ids.codigo.text)        
+        codigo = str(root.ids.info_tab.ids.codigo.text)        
         print('Adicionando informações do cliente:', codigo)
         for cliente in self.dados_clientes:
             if codigo == str(cliente['codigo']):
@@ -77,7 +77,7 @@ class Editar_tela(Screen):
                 text="Deseja realizar as alterações?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.adicionar
+                        text="Sim",text_color=MDApp.get_running_app().theme_cls.text_color, on_release = self.adicionar
                     ),
                     MDFlatButton(
                         text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_certeza
