@@ -143,6 +143,17 @@ class Visita_tela(Screen):
         app.root.transition.direction = 'right'
         app.root.current = 'Visitas_tela'
 
+    def adicionar_nome_fantasia(self):
+        app = MDApp.get_running_app()
+        nome_fantasia = app.root.get_screen('Info_tela').ids.info_tab.ids.nome_fantasia.text
+        self.ids.nome_fantasia.text = nome_fantasia
+        
+        data = date.today()
+        self.primeiro_dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
+        self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
+        self.primeiro_ano = str(data.year)
+        self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+
     
 class Item_cliente(OneLineAvatarListItem):
     divider = None

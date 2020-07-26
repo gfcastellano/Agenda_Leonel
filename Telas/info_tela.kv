@@ -251,6 +251,10 @@
         md_bg_color: app.theme_cls.primary_dark
         rotation_root_button: True
         pos_hint: {"center_x": .9, "center_y": .1}
+        on_release: 
+            app.root.transition.direction = 'left'
+            app.root.get_screen('Visitas_tela').ir_para_visita_tela()
+            app.root.get_screen('Visita_tela').adicionar_nome_fantasia()
 
     
 

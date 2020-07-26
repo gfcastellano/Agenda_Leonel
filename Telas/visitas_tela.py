@@ -273,6 +273,8 @@ class Visitas_tela(Screen):
                 ],
             )
         self.popup_visita.open()
+
+    
         
 
 
