@@ -19,6 +19,8 @@ from Telas.visita_tela import Visita_tela
 
 
 import json
+import requests
+from pprint import pprint
 
 
 class Gerenciador(ScreenManager):
@@ -29,7 +31,7 @@ class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
     telas = ['Menu_tela']
-    
+    url_db = 'https://agenda-leonel.firebaseio.com/.json'
     path = ''
     dados_visitas=[]
     
@@ -173,7 +175,17 @@ class MainApp(MDApp):
         #print('FINAL DE VOLTAR', app.telas)
         #print('+++++++++++++++++++++++++++')
 
+     
+    def request(self):
+        request = requests.get(self.url_db)
+        print(request.json())
     
+    def patch(self):
+        to_database = json.loads('{"Parent2":{"Child1":"Valor1","Child2":"Valor2"}}')
+        print(type(to_database))
+        pprint(self.dados_clientes)
+
+        requests.patch(url = self.url_db, json = to_database)
 
 
 MainApp().run()
