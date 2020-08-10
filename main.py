@@ -181,9 +181,9 @@ class MainApp(MDApp):
         print(request.json())
     
     def patch(self):
-        to_database = json.loads('{"Parent2":{"Child1":"Valor1","Child2":"Valor2"}}')
+        to_database = json.loads(self.dados_clientes)
         print(type(to_database))
-        pprint(self.dados_clientes)
+        #pprint(self.dados_clientes)
 
         requests.patch(url = self.url_db, json = to_database)
 
