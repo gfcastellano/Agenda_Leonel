@@ -1,4 +1,4 @@
-import firebase_admin
+iimport firebase_admin
 from firebase_admin import credentials, firestore
 import json
 
@@ -11,14 +11,7 @@ db = firestore.client()
 
 
 # Passar informações de clientes para base de dados
-""" doc_ref = db.collection('users').document('J3GKQOqo7FNSevlcpifu').collection('clients').document('teste2')
-doc_ref.set({
-    'nome_fantasia': 'Giovana Pet-Shop',
-    'qualquer coisa': 'qualquer'
-
-}) """
-
-#path = "C:\\Users\\Dados\\AppData\\Roaming\\main\\"
+o# Ler dados de clientes
 with open('clientes.json', 'r') as file:
     dados_clientes = json.load(file)
 # Colocar cada cliente como um documento dentro da data base
@@ -60,5 +53,22 @@ for cliente in dados_clientes:
             "tap_higienico": cliente['tap_higienico']
         }
     )
+# Ler dados de visitas
+with open('visitas.json', 'r') as file:
+    dados_visitas = json.load(file)
+# Colocar cada cliente como um documento dentro da data base
+doc_ref = db.collection('users').document('J3GKQOqo7FNSevlcpifu').collection('visitas')
 
-print(len(dados_clientes))
+for visita in dados_visitas:
+    doc_ref.add(
+        {
+            "data": visita['data'],
+            "nome_fantasia": visita['nome_fantasia'],
+            "contato": visita['contato'],
+            "informacoes": visita['informacoes'],
+            "codigo": visita['codigo'],
+            "visita": visita['visita']
+        }
+    )
+
+print(len(dados_visitas))
