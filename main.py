@@ -26,7 +26,6 @@ from pprint import pprint
 import firebase_admin
 from firebase_admin import credentials, firestore
 import json
-import google.cloud
 
 """ cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
 firebase_admin.initialize_app(cred)
