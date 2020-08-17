@@ -23,8 +23,8 @@ import requests
 from pprint import pprint
 
 
-import firebase_admin
-from firebase_admin import credentials, firestore
+""" import firebase_admin
+from firebase_admin import credentials, firestore """
 import json
 
 """ cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
@@ -44,12 +44,13 @@ class Gerenciador(ScreenManager):
 
 class MainApp(MDApp):
     # Conectar a base de dados
-    cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
+    #cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
     #Ler clientes
     dados_clientes =[]
     popup_leituradados = None
     telas = ['Menu_tela']
-    ######url_db = 'https://agenda-leonel.firebaseio.com/.json'
+    url_db = 'https://agenda-leonel.firebaseio.com/users/'
+    user_id = 'I10r2hxrlpU6Qmsf9DELnMcH9D22/'
     path = ''
     dados_visitas=[]
     
@@ -193,21 +194,15 @@ class MainApp(MDApp):
         #print('FINAL DE VOLTAR', app.telas)
         #print('+++++++++++++++++++++++++++')
 
-     
     def get(self):
-        if not firebase_admin._apps:
-            firebase_admin.initialize_app(self.cred)
-            db = firestore.client()
-        # Requisitar todos os clientes da data base
-        doc_ref = db.collection('users').document('J3GKQOqo7FNSevlcpifu').collection('clientes')
-        doc_query = doc_ref.stream()  ##.where(u'capital', u'==', True)
-
-        dados_clientes = []
-        for doc in doc_query:
-            #print(type(doc))
-            #print(doc.to_dict())
-            dados_clientes.append(doc.to_dict())
-        self.dados_clientes = sorted(dados_clientes, key=lambda k: k['codigo']) 
+        # Acessa a base de dados e recupera as informações dos clientes
+        response = requests.get(self.url_db + self.user_id + 'clientes' + '.json')
+        print('Fez o request dos clientes?',response.ok)
+        self.dados_clientes = json.loads(response.content.decode())
+        # Acessa a base de dados e recupera as informações das visitas
+        response = requests.get(self.url_db + self.user_id + 'visitas' + '.json')
+        print('Fez o request das visitas?',response.ok)
+        self.dados_visitas = json.loads(response.content.decode())
     
     def patch(self):
         to_database = json.loads(self.dados_clientes)

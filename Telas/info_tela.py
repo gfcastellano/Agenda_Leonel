@@ -102,38 +102,21 @@ class Info_tela(Screen):
                         print('Cliente:', dados['nome_fantasia'])
 
         #Preencher informações no info_tab
-
-        info_tab = self.ids.info_tab  
-        info_tab.ids.codigo.text        = str(dados['codigo'])
-        info_tab.ids.nome_fantasia.text = str(dados['nome_fantasia'])
-        info_tab.ids.endereco.text      = str(dados['endereco'])
-        info_tab.ids.numero.text        = str(dados['numero'])
-        info_tab.ids.bairro.text        = str(dados['bairro'])
-        info_tab.ids.telefone_fixo.text = str(dados['telefone_fixo'])
-        info_tab.ids.perfil_cliente.text= str(dados['perfil_cliente'])
-        info_tab.ids.nome_1.text        = str(dados['nome_1'])
-        info_tab.ids.telefone_1.text    = str(dados['telefone_1'])
-        info_tab.ids.tipo_1.text        = str(dados['tipo_1'])
-        info_tab.ids.nome_2.text        = str(dados['nome_2'])
-        info_tab.ids.telefone_2.text    = str(dados['telefone_2'])
-        info_tab.ids.tipo_2.text        = str(dados['tipo_2'])
-        info_tab.ids.nome_3.text        = str(dados['nome_3'])
-        info_tab.ids.telefone_3.text    = str(dados['telefone_3'])
-        info_tab.ids.tipo_3.text        = str(dados['tipo_3'])
-        info_tab.ids.razao_social.text  = str(dados['razao_social'])
-        info_tab.ids.cnpj.text          = str(dados['cnpj'])
-        info_tab.ids.cep.text           = str(dados['cep'])
-
-        x = (lambda a: 'Sim' if a == 'True' else '')
-
-        info_tab.ids.therapet.text    = x(str(dados['therapet']))
-        info_tab.ids.tesoura.text     = x(str(dados['tesoura']))
-        info_tab.ids.tap_higienico.text = x(str(dados['tap_higienico']))
-        info_tab.ids.banho.text       = x(str(dados['banho']))
-        info_tab.ids.tosa.text        = x(str(dados['tosa']))
-        info_tab.ids.pet_shop.text    = x(str(dados['pet_shop']))
-        info_tab.ids.clinica.text     = x(str(dados['clinica']))
-
+        info_tab = self.ids.info_tab
+        lista = ['therapet','tesoura','tap_higienico','banho','tosa','pet_shop','clinica']
+        for campo, _ in info_tab.ids.items():
+            if campo != 'scroll_info':
+                try:
+                    info_tab.ids[campo].text = str(dados[campo])
+                except KeyError:
+                    info_tab.ids[campo].text = ''
+            elif campo in lista:
+                try:
+                    x = (lambda a: 'Sim' if a == 'True' else '')
+                    info_tab.ids[campo].text = x(str(dados['therapet']))
+                except KeyError:
+                    info_tab.ids[campo].text = ''
+        
         #Adidionando informações no visitas_tab
         
         visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
