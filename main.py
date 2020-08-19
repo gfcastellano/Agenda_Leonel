@@ -239,26 +239,16 @@ class MainApp(MDApp):
             print('Fez o patch das visitas?', response.ok)
             #print('Conteudo', response.content.decode())
 
-    def post(self, dados):
-        print('Executando o post()')
-        # Armazena váriáveis necessárias
-        to_database = json.dumps(dados)
-        print('to_database:',to_database)
-        codigo = int(dados['codigo'])
-        response = requests.post(url = self.url_db + self.user_id + 'clientes/' + str(codigo - 1) + '.json', 
-                                  data = to_database)
-        print('Fez o post do novo cliente?', response.ok)
-        print('Conteudo', response.content.decode())
 
 
-    def adicionar_index_a_visitas(self):
+    """ def adicionar_index_a_visitas(self):
         a = 0
         for visita in self.dados_visitas:
             visita['identificador'] = a
             a += 1
 
         with open('visitas.json', 'w') as data:
-            json.dump(self.dados_visitas,data)
+            json.dump(self.dados_visitas,data) """
 
 
 

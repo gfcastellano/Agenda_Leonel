@@ -61,13 +61,21 @@ class Info_tela(Screen):
         self.ids.tap_higienico.active = False
     
     def adicionar_infos(self,root):
-        dados=[]
+        dados={}
         print('Adicionando infos a Info_tela')
+        print('Tipo de root ==>',type(root))
 
         #Identificar cliente
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>" or str(root) == "<Screen name='Editar_tela'>":
             codigo = str(root.ids.codigo.text)
-            dados=''
+            #dados=''
+            print('Adicionando informações do cliente:', codigo)
+            for cliente in self.dados_clientes:
+                if codigo == str(cliente['codigo']):
+                    dados = cliente
+        elif type(root) == str:
+            codigo = root
+            #dados=''
             print('Adicionando informações do cliente:', codigo)
             for cliente in self.dados_clientes:
                 if codigo == str(cliente['codigo']):
@@ -94,12 +102,15 @@ class Info_tela(Screen):
                     else:
                         break
             else:
-                dados=''
+                #dados=''
                 print('Adicionando informações do cliente na latitude:', lat)
                 for cliente in self.dados_clientes:
-                    if str(cliente['lat']) == lat:
-                        dados = cliente
-                        print('Cliente:', dados['nome_fantasia'])
+                    try:
+                        if str(cliente['lat']) == lat:
+                            dados = cliente
+                            print('Cliente:', dados['nome_fantasia'])
+                    except KeyError: #Pode ser que não tenha o lat em seus dados
+                        pass
 
         #Preencher informações no info_tab
         info_tab = self.ids.info_tab

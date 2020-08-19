@@ -141,8 +141,10 @@ class Adicionar_cliente_tela(Screen):
         app.patch(self.novo_cliente)
         # Requisitar dados novos
         app.get()
+        # Adicionar novo marcador ao mapa
+        #app.root.get_screen('Mapa_tela').verificar_marcadores()
         # Repopular a tela anterior
-        app.root.get_screen('Info_tela').buscar()
+        app.root.get_screen('Info_tela').adicionar_infos(self.ids.codigo.text)
         # Fecha o popup
         app.popup_leituradados.dismiss()
         # Volta para tela anterior
@@ -156,10 +158,10 @@ class Adicionar_cliente_tela(Screen):
         self.abrir_popup_error()
         
 
-        self.dados_clientes.append(self.novo_cliente)
+        """ self.dados_clientes.append(self.novo_cliente)
         app = MDApp.get_running_app()
         with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data)
+            json.dump(self.dados_clientes,data) """
 
         
         app.root.transition.direction = 'right'
@@ -173,7 +175,7 @@ class Adicionar_cliente_tela(Screen):
         if not self.popup_error:
             self.popup_error = MDDialog( size_hint = [0.8,0.8],
                 title= 'ERRO',
-                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas e o CEP para o endereço digitado.' \
+                text = ('As informações NÃO foram armazenadas , houve um erro ao tentar conseguir as coordenadas geográficas e o CEP para o endereço digitado.' \
                         ' \n'
                         'Não será possivel colocar um marcador para esse cliente no mapa.'),
                 buttons=[MDRaisedButton(
