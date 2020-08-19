@@ -136,17 +136,20 @@ class Visita_tela(Screen):
             novo_visita['informacoes']     = self.ids.informacoes.text
             novo_visita['identificador']   = self.ids.identificador.text
             
-            self.novo_visita = novo_visita
+            #self.novo_visita = novo_visita
 
-            self.dados_visitas.append(self.novo_visita)
+            #self.dados_visitas.append(self.novo_visita)
             #pprint(novo_visita)
 
         # Colocar dados no Firebase
         app = MDApp.get_running_app()
         app.patch(novo_visita)
-        """ with open(app.path + 'visitas.json', 'w') as data:
-            json.dump(self.dados_visitas,data) """
-
+        # Requisitar dados novos
+        app.get()
+        # Repopular a tela anterior
+        if app.root.get_screen('Visitas_tela').ids.buscar.text != '':
+            app.root.get_screen('Visitas_tela').buscar()
+        # Voltar a tela anterior
         app.root.transition.direction = 'right'
         app.root.current = 'Visitas_tela'
 

@@ -23,8 +23,8 @@ class Clientes_tela(Screen):
         self.dados_clientes = app.dados_clientes
         
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
-        if len(children) < 1:
-            self.adicionar_clientes(self.dados_clientes)
+        #if len(children) < 1:
+        #    self.adicionar_clientes(self.dados_clientes)
         if app.telas[-2] != "Info_tela":
             self.ids.scroll.scroll_y = 1
 

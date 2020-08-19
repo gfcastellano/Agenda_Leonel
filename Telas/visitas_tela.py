@@ -47,7 +47,8 @@ class Visitas_tela(Screen):
             ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
             scroll.add_widget(Visita(data = data,
-                                     nome_fantasia = visita['nome_fantasia'],
+                                     nome_fantasia = visita['nome_fantasia'],                                     
+                                     identificador = str(visita['identificador']),
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes'],
                                      visita = visita['visita']))
@@ -62,10 +63,9 @@ class Visitas_tela(Screen):
             mes  = visita['data'][-5:-3]
             ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
-            print(visita['index'])
             visitas_tab.add_widget(Visita(data = data,
                                           nome_fantasia = visita['nome_fantasia'],
-                                          identificador = data,
+                                          identificador = str(visita['identificador']),
                                           contato = visita['contato'],
                                           informacoes = visita['informacoes'],
                                           visita = visita['visita']
@@ -256,6 +256,7 @@ class Visitas_tela(Screen):
     def ir_para_visita_tela(self):
         app = MDApp.get_running_app()
         app.root.get_screen('Visita_tela').limpar()
+        app.root.get_screen('Visita_tela').ids.identificador.text = str(len(self.dados_visitas))
         app.root.current = 'Visita_tela'
         print('Executou')
 
