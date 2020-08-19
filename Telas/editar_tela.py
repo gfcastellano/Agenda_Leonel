@@ -182,8 +182,8 @@ class Editar_tela(Screen):
         app.patch(self.novo_cliente)
         # Requisitar dados novos
         app.get()
-        # Registrar novo marcador no mapa com novos dados de lat e lon
-        app.root.get_screen('Mapa_tela').verificar_marcadores()
+        """ # Registrar novo marcador no mapa com novos dados de lat e lon
+        #app.root.get_screen('Mapa_tela').verificar_marcadores() """
         # Repopular a tela anterior
         app.root.get_screen('Info_tela').adicionar_infos(self)
 
