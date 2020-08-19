@@ -63,14 +63,32 @@
     size_hint_y: None
     height: self.minimum_height
     orientation: 'vertical'
-    on_release: self.abrir_visita(self)
+    on_release: 
+        self.abrir_visita(self)
+        print(self.ids.identificador.text)
     GridLayout:
-        rows: 4
+        rows: 5
         cols: 2
         size_hint_y: None
         height: self.minimum_height
         orientation: 'vertical'
         padding: 30
+        MDLabel:
+            text: 'Identificador: '
+            halign: 'left'
+            valign: 'bottom'
+            size_hint_x: 3
+            color: app.theme_cls.primary_dark
+            bold: True
+            height: 60
+            size_hint_y: None
+        MDLabel:
+            id: identificador
+            text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+            halign: 'left'
+            size_hint_x: 6
+            color: app.theme_cls.primary_dark
+            bold: True
         MDLabel:
             id: data
             halign: 'left'
@@ -107,13 +125,13 @@
             size_hint_x: 0.4
             size_hint_y: None
             halign: 'left'
-            valign: 'middle'        
+            valign: 'middle'
         MDLabel:
             text: 'Informações:'
             halign:'left'
             valign: 'top'
             size_hint_y: None
-            bold: True        
+            bold: True
         MDLabel:
             id: informacoes
             halign:'left'

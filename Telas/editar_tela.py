@@ -35,41 +35,33 @@ class Editar_tela(Screen):
         for cliente in self.dados_clientes:
             if codigo == str(cliente['codigo']):
                 dados = cliente
+
+        app = MDApp.get_running_app()
+        editar_tela = app.root.get_screen('Editar_tela')
+        lista = ['therapet','tesoura','tap_higienico','banho','tosa','pet_shop','clinica']
+        #print(type(editar_tela))
+        #print(editar_tela)
+        #print(editar_tela.ids)
+        for campo, _ in editar_tela.ids.items():
+            if campo != 'scroll_info':
+                try:
+                    editar_tela.ids[campo].text = str(dados[campo])
+                except KeyError:
+                    editar_tela.ids[campo].text = ''
+            elif campo in lista:
+                try:
+                    x = (lambda a: 'Sim' if a == 'True' else '')
+                    editar_tela.ids[campo].active = dados[campo]
+                except KeyError:
+                    editar_tela.ids[campo].text = ''
+        
+        self.endereco = editar_tela.ids['endereco'].text
+        self.numero = editar_tela.ids['numero'].text
+        self.bairro = editar_tela.ids['bairro'].text
+        self.cidade = editar_tela.ids['cidade'].text
+
            
-        self.ids.codigo.text        = str(dados['codigo'])
-        self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
-        self.ids.endereco.text      = str(dados['endereco'])
-        self.endereco  = str(dados['endereco'])
-        self.ids.numero.text        = str(dados['numero'])
-        self.numero    = str(dados['numero'])
-        self.ids.bairro.text        = str(dados['bairro'])
-        self.bairro    = str(dados['bairro'])
-        self.ids.cidade.text        = str(dados['cidade'])
-        self.cidade    = str(dados['cidade'])
-        self.ids.telefone_fixo.text = str(dados['telefone_fixo'])
-        self.ids.perfil_cliente.text= str(dados['perfil_cliente'])
-        self.ids.nome_1.text        = str(dados['nome_1'])
-        self.ids.telefone_1.text    = str(dados['telefone_1'])
-        self.ids.tipo_1.text        = str(dados['tipo_1'])
-        self.ids.nome_2.text        = str(dados['nome_2'])
-        self.ids.telefone_2.text    = str(dados['telefone_2'])
-        self.ids.tipo_2.text        = str(dados['tipo_2'])
-        self.ids.nome_3.text        = str(dados['nome_3'])
-        self.ids.telefone_3.text    = str(dados['telefone_3'])
-        self.ids.tipo_3.text        = str(dados['tipo_3'])
-        self.ids.razao_social.text  = str(dados['razao_social'])
-        self.ids.cnpj.text          = str(dados['cnpj'])
-        self.ids.cep.text           = str(dados['cep'])
-        self.lat                    = str(dados['lat'])
-        self.lon                    = str(dados['lon'])
-
-        x = (lambda a: True if a == 'True' else False)
-
-        self.ids.banho.active       = x(str(dados['banho']))
-        self.ids.tosa.active        = x(str(dados['tosa']))
-        self.ids.pet_shop.active    = x(str(dados['pet_shop']))
-        self.ids.clinica.active     = x(str(dados['clinica']))
-
+        
     def abrir_popup_certeza(self):
         if not self.popup_certeza:
             app = MDApp.get_running_app()
@@ -117,8 +109,8 @@ class Editar_tela(Screen):
         novo_cliente['cnpj']           = self.ids.cnpj.text
         novo_cliente['cep']            = self.ids.cep.text
 
-        novo_cliente['lat']           = self.lat
-        novo_cliente['lon']           = self.lon
+        #novo_cliente['lat']           = self.lat
+        #novo_cliente['lon']           = self.lon
 
         novo_cliente['banho']          = self.ids.banho.active
         novo_cliente['tosa']           = self.ids.tosa.active
@@ -151,11 +143,15 @@ class Editar_tela(Screen):
 
             index = int(self.novo_cliente['codigo']) - 1
 
-            self.dados_clientes[index] = self.novo_cliente
+            app=MDApp.get_running_app()
+            app.patch(self.novo_cliente)
+
+            """ self.dados_clientes[index] = self.novo_cliente
             app = MDApp.get_running_app()
             with open(app.path + 'clientes.json', 'w') as data:
-                json.dump(self.dados_clientes,data)
+                json.dump(self.dados_clientes,data) """
 
+            # Retirar o popup da tela e voltar para a tela de informações já atualizada
             app = MDApp.get_running_app()
             app.popup_leituradados.dismiss()
             app.root.transition.direction = 'right'
@@ -181,12 +177,16 @@ class Editar_tela(Screen):
                 app.popup_leituradados.dismiss()
                 self.abrir_popup_error()
 
-        index = int(self.novo_cliente['codigo']) - 1
+        # Colocar na base de dados
+        app=MDApp.get_running_app()
+        app.patch(self.novo_cliente)
+
+        """ index = int(self.novo_cliente['codigo']) - 1
 
         self.dados_clientes[index] = self.novo_cliente
         app = MDApp.get_running_app()
         with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data)
+            json.dump(self.dados_clientes,data) """
 
         app = MDApp.get_running_app()
         app.popup_leituradados.dismiss()
@@ -199,13 +199,17 @@ class Editar_tela(Screen):
         app = MDApp.get_running_app()
         app.popup_leituradados.dismiss()
         self.abrir_popup_error()
+
+        # Colocar na base de dados
+        app=MDApp.get_running_app()
+        app.patch(self.novo_cliente)
         
-        index = int(self.novo_cliente['codigo']) - 1
+        """ index = int(self.novo_cliente['codigo']) - 1
 
         self.dados_clientes[index] = self.novo_cliente
         app = MDApp.get_running_app()
         with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data)
+            json.dump(self.dados_clientes,data) """
 
         
         app.root.transition.direction = 'right'

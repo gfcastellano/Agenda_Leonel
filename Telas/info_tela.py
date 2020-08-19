@@ -113,7 +113,7 @@ class Info_tela(Screen):
             elif campo in lista:
                 try:
                     x = (lambda a: 'Sim' if a == 'True' else '')
-                    info_tab.ids[campo].text = x(str(dados['therapet']))
+                    info_tab.ids[campo].text = x(str(dados[campo]))
                 except KeyError:
                     info_tab.ids[campo].text = ''
         

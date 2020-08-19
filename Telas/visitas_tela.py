@@ -62,12 +62,14 @@ class Visitas_tela(Screen):
             mes  = visita['data'][-5:-3]
             ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
+            print(visita['index'])
             visitas_tab.add_widget(Visita(data = data,
-                                     nome_fantasia = visita['nome_fantasia'],
-                                     contato = visita['contato'],
-                                     informacoes = visita['informacoes'],
-                                     visita = visita['visita']))
-
+                                          nome_fantasia = visita['nome_fantasia'],
+                                          identificador = data,
+                                          contato = visita['contato'],
+                                          informacoes = visita['informacoes'],
+                                          visita = visita['visita']
+                                          ))
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
@@ -280,7 +282,7 @@ class Visitas_tela(Screen):
 
 
 class Visita(MDCard):
-    def __init__(self,data='', nome_fantasia='',contato='',visita='', informacoes='',**kwargs):
+    def __init__(self,data='', nome_fantasia='',contato='',visita='', informacoes='',identificador='',**kwargs):
         super().__init__(**kwargs)
         self.ids.data.text          = data
         #self.ids.codigo.text        = codigo
@@ -288,6 +290,7 @@ class Visita(MDCard):
         self.ids.contato.text       = contato
         self.ids.visita.text        = visita
         self.ids.informacoes.text   = informacoes
+        self.ids.identificador.text = identificador
 
     def abrir_visita(self, objeto):
         print('Executando abrir_visita')

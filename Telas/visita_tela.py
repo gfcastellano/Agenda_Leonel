@@ -10,6 +10,7 @@ from kivy.properties import StringProperty
 from kivy.clock import Clock
 
 import json
+from pprint import pprint
 
 
 
@@ -30,6 +31,7 @@ class Visita_tela(Screen):
         #self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
         #self.primeiro_ano = str(data.year)
         #self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+
     def adicionar_infos(self,objeto):
         self.ids.data.text    = objeto.ids.data.text
         #self.ids.codigo.text  = objeto.ids.codigo.text
@@ -37,6 +39,7 @@ class Visita_tela(Screen):
         self.ids.contato.text    = objeto.ids.contato.text
         self.ids.informacoes.text    = objeto.ids.informacoes.text
         self.ids.visita.text    = objeto.ids.visita.text
+        self.ids.identificador.text    = objeto.ids.identificador.text
 
     def limpar(self):
         data = date.today()
@@ -112,6 +115,7 @@ class Visita_tela(Screen):
         self.popup_pesquisa_contato.open()
 
     def adicionar_visita(self):
+        print("Execuntando adicionar_visita")
         novo_visita={}
         data       = self.ids.data.text
         nome_fantasia   = self.ids.nome_fantasia.text
@@ -122,23 +126,26 @@ class Visita_tela(Screen):
 
         if data == '' or nome_fantasia == '' or contato == '' or visita == '':
             #self.abrir_popup_infos()
-            print('Entrou no if')
+            print('Não existem os dados mínimos necessários, não salvando as alterações')
         else:
+            print("Existem dados mínimos necessários para adicionar visita")
             novo_visita['data']            = self.ids.data.text
-            novo_visita['nome_fantasia']         = self.ids.nome_fantasia.text
+            novo_visita['nome_fantasia']   = self.ids.nome_fantasia.text
             novo_visita['contato']         = self.ids.contato.text
             novo_visita['visita']          = self.ids.visita.text
             novo_visita['informacoes']     = self.ids.informacoes.text
-
-
+            novo_visita['identificador']   = self.ids.identificador.text
             
             self.novo_visita = novo_visita
 
             self.dados_visitas.append(self.novo_visita)
+            #pprint(novo_visita)
 
+        # Colocar dados no Firebase
         app = MDApp.get_running_app()
-        with open(app.path + 'visitas.json', 'w') as data:
-            json.dump(self.dados_visitas,data)
+        app.patch(novo_visita)
+        """ with open(app.path + 'visitas.json', 'w') as data:
+            json.dump(self.dados_visitas,data) """
 
         app.root.transition.direction = 'right'
         app.root.current = 'Visitas_tela'

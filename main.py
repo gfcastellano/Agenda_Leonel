@@ -59,10 +59,11 @@ class MainApp(MDApp):
         return Gerenciador()
 
     def on_start(self):
+        #self.get()
         #self.carregar_clientes()
         self.carregar_visitas()
         clientes_tela = Clientes_tela()
-        clientes_tela.adicionar_clientes(self.dados_clientes)
+        #clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
 
         
@@ -86,7 +87,7 @@ class MainApp(MDApp):
         self.path = MDApp.get_running_app().user_data_dir + '/'
         print(self.path)
         try:
-            with open(self.path + 'visitas.json', 'r') as file:
+            with open(self.path + 'aaaaaaaaavisitas.json', 'r') as file:
                 self.dados_visitas = json.load(file)
                 print('visitas.json carregado com sucesso,' 'tamanho:',len(self.dados_visitas))
         except FileNotFoundError:
@@ -204,12 +205,48 @@ class MainApp(MDApp):
         print('Fez o request das visitas?',response.ok)
         self.dados_visitas = json.loads(response.content.decode())
     
-    def patch(self):
-        to_database = json.loads(self.dados_clientes)
-        print(type(to_database))
-        #pprint(self.dados_clientes)
+    def patch(self, dados):
+        print('Executando o patch()')
+        to_database = json.dumps(dados)
+        print('to_database:',to_database)
+        try:
+            codigo = int(dados['codigo']) - 1
+        except:
+            pass
+        nome_fantasia = str(dados['nome_fantasia'])
+        data = str(dados['data'])
+        try:
+            index = str(dados['identificador'])
+            print(index)
+            print('Encontrou index. Ou seja, é uma visita que foi passada')
+        except:
+            pass
+        #print(type(to_database))
+        
+        #print('Código:', codigo)
+        #print(list(dados.keys()))
 
-        requests.patch(url = self.url_db, json = to_database)
+        if 'visita' not in list(dados.keys()):
+            print('Iniciou o patch')
+            response = requests.patch(url = self.url_db + self.user_id + 'clientes/' + str(codigo - 1) + '.json', 
+                                    data = to_database)
+            print('Fez o patch dos clientes?', response.ok)
+            print('Conteudo', response.content.decode())
+        """ else:
+            response = requests.patch(url = self.url_db + self.user_id + 'visitas/' + index + '.json', 
+                                    json = to_database)
+            print('Fez o patch das visitas?', response.ok)
+            print('Conteudo', response.content.decode()) """
+
+    
+    def adicionar_index_a_visitas(self):
+        a = 0
+        for visita in self.dados_visitas:
+            visita['index'] = str(a)
+            a += 1
+
+        with open('visitas.json', 'w') as data:
+            json.dump(self.dados_visitas,data)
 
 
 

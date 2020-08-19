@@ -28,7 +28,19 @@
                     BoxLayout:
                         size_hint_y: None
                         height: self.minimum_height
+                        size_hint_y: None
+                        height: 60
                         MDLabel:
+                            text: 'Identificador:'
+                            width: root.ids.DATA.width
+                        MDLabel:
+                            id: identificador
+                            text: ''
+                    BoxLayout:
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            id: DATA
                             text: ' Data:'
                             halign: 'left'
                             valign: 'center'
