@@ -50,10 +50,10 @@ class Editar_tela(Screen):
                     editar_tela.ids[campo].text = ''
             elif campo in lista:
                 try:
-                    x = (lambda a: 'Sim' if a == 'True' else '')
+                    x = (lambda a: 'True' if a == 'true' else 'False')
                     editar_tela.ids[campo].active = dados[campo]
                 except KeyError:
-                    editar_tela.ids[campo].text = ''
+                    editar_tela.ids[campo].active = 'False'
         
         self.endereco = editar_tela.ids['endereco'].text
         self.numero = editar_tela.ids['numero'].text
@@ -146,10 +146,10 @@ class Editar_tela(Screen):
             app=MDApp.get_running_app()
             app.patch(self.novo_cliente)
 
-            """ self.dados_clientes[index] = self.novo_cliente
-            app = MDApp.get_running_app()
-            with open(app.path + 'clientes.json', 'w') as data:
-                json.dump(self.dados_clientes,data) """
+            # Requisitar dados novos
+            app.get()
+            # Repopular a tela anterior
+            app.root.get_screen('Info_tela').adicionar_infos(self)
 
             # Retirar o popup da tela e voltar para a tela de informações já atualizada
             app = MDApp.get_running_app()
@@ -180,13 +180,10 @@ class Editar_tela(Screen):
         # Colocar na base de dados
         app=MDApp.get_running_app()
         app.patch(self.novo_cliente)
-
-        """ index = int(self.novo_cliente['codigo']) - 1
-
-        self.dados_clientes[index] = self.novo_cliente
-        app = MDApp.get_running_app()
-        with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data) """
+        # Requisitar dados novos
+        app.get()
+        # Repopular a tela anterior
+        app.root.get_screen('Info_tela').adicionar_infos(self)
 
         app = MDApp.get_running_app()
         app.popup_leituradados.dismiss()
@@ -203,14 +200,10 @@ class Editar_tela(Screen):
         # Colocar na base de dados
         app=MDApp.get_running_app()
         app.patch(self.novo_cliente)
-        
-        """ index = int(self.novo_cliente['codigo']) - 1
-
-        self.dados_clientes[index] = self.novo_cliente
-        app = MDApp.get_running_app()
-        with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data) """
-
+        # Requisitar dados novos
+        app.get()
+        # Repopular a tela anterior
+        app.root.get_screen('Info_tela').adicionar_infos(self)
         
         app.root.transition.direction = 'right'
         app.root.current = 'Info_tela'

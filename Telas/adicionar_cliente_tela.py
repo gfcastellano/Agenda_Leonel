@@ -62,11 +62,11 @@ class Adicionar_cliente_tela(Screen):
         bairro     = self.ids.bairro.text
         cidade     = self.ids.cidade.text
 
-        print('Nome:',nome)
-        print('endereco:',endereco)
-        print('numero:',numero)
-        print('bairro:',bairro)
-        print('cidade:',cidade)
+        #print('Nome:',nome)
+        #print('endereco:',endereco)
+        #print('numero:',numero)
+        #print('bairro:',bairro)
+        #print('cidade:',cidade)
 
         if nome == '' or endereco == '' or numero == '' or bairro == '' or cidade == '':
             self.abrir_popup_infos()
@@ -136,13 +136,16 @@ class Adicionar_cliente_tela(Screen):
                 app.popup_leituradados.dismiss()
                 self.abrir_popup_error()
 
-        self.dados_clientes.append(self.novo_cliente)
+        # Colocar novos dados na base de dados
         app = MDApp.get_running_app()
-        with open(app.path + 'clientes.json', 'w') as data:
-            json.dump(self.dados_clientes,data)
-
-        app = MDApp.get_running_app()
+        app.patch(self.novo_cliente)
+        # Requisitar dados novos
+        app.get()
+        # Repopular a tela anterior
+        app.root.get_screen('Info_tela').buscar()
+        # Fecha o popup
         app.popup_leituradados.dismiss()
+        # Volta para tela anterior
         app.root.transition.direction = 'right'
         app.root.current = 'Menu_tela'
 

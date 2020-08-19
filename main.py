@@ -211,7 +211,7 @@ class MainApp(MDApp):
         to_database = json.dumps(dados)
         print('to_database:',to_database)
         try:
-            codigo = int(dados['codigo']) - 1
+            codigo = int(dados['codigo'])
         except:
             pass
         nome_fantasia = str(dados['nome_fantasia'])
@@ -239,7 +239,18 @@ class MainApp(MDApp):
             print('Fez o patch das visitas?', response.ok)
             #print('Conteudo', response.content.decode())
 
-    
+    def post(self, dados):
+        print('Executando o post()')
+        # Armazena váriáveis necessárias
+        to_database = json.dumps(dados)
+        print('to_database:',to_database)
+        codigo = int(dados['codigo'])
+        response = requests.post(url = self.url_db + self.user_id + 'clientes/' + str(codigo - 1) + '.json', 
+                                  data = to_database)
+        print('Fez o post do novo cliente?', response.ok)
+        print('Conteudo', response.content.decode())
+
+
     def adicionar_index_a_visitas(self):
         a = 0
         for visita in self.dados_visitas:
