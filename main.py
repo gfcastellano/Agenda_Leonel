@@ -25,7 +25,6 @@ from pprint import pprint
 
 """ import firebase_admin
 from firebase_admin import credentials, firestore """
-import json
 
 """ cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
 firebase_admin.initialize_app(cred)
@@ -238,7 +237,6 @@ class MainApp(MDApp):
                                     data = to_database)
             print('Fez o patch das visitas?', response.ok)
             #print('Conteudo', response.content.decode())
-
 
 
     """ def adicionar_index_a_visitas(self):

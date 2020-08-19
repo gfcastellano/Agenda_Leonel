@@ -12,6 +12,7 @@ class Busca_tela(Screen):
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)
         self.ids.scroll.scroll_y = 1
+        self.dados_clientes = app.dados_clientes
 
     def apagar_texto(self,id):
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids
@@ -84,6 +85,7 @@ class Busca_tela(Screen):
                 else:
                     if str(dicionario[item]).lower() not in str(cliente[item]).lower():
                         retirar.append(cliente)
+                        
             print('Tamanho de retirar:', len(retirar))
             for x in retirar:
                 match.remove(x)
