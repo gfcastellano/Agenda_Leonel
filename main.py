@@ -17,6 +17,8 @@ from Telas.visitas_tela import Visitas_tela
 from kivymd.icon_definitions import md_icons
 from Telas.visita_tela import Visita_tela
 
+from kivy.core.window import Window
+Window.softinput_mode = 'below_target'
 
 import json
 import requests
