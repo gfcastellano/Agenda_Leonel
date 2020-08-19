@@ -72,14 +72,7 @@ class Info_tela(Screen):
             print('Adicionando informações do cliente:', codigo)
             for cliente in self.dados_clientes:
                 if codigo == str(cliente['codigo']):
-                    dados = cliente
-        elif type(root) == str:
-            codigo = root
-            #dados=''
-            print('Adicionando informações do cliente:', codigo)
-            for cliente in self.dados_clientes:
-                if codigo == str(cliente['codigo']):
-                    dados = cliente
+                    dados = cliente                    
         else:
             lat = str(root)
             print('Tamanho de root:',len(str(root)))
@@ -129,13 +122,15 @@ class Info_tela(Screen):
                     info_tab.ids[campo].text = ''
         
         #Adidionando informações no visitas_tab
-        
-        visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
-        visitas_tela.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
-        self.ids.visitas_tab.ids.data.text = visitas_tela.ids.data.text
-        visitas_tela.buscar()
+        # Verificar se não veio da tela de adicionar cleinte
+        app = MDApp.get_running_app()
+        if app.telas[-1] != 'Adicionar_cliente_tela':
+            visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
+            visitas_tela.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+            self.ids.visitas_tab.ids.data.text = visitas_tela.ids.data.text
+            visitas_tela.buscar()
 
-        self.ids.visitas_tab.ids.scroll_visitas.children = visitas_tela.ids.scroll.children
+            self.ids.visitas_tab.ids.scroll_visitas.children = visitas_tela.ids.scroll.children
 
 
 

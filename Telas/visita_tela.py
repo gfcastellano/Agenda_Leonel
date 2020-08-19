@@ -99,12 +99,13 @@ class Visita_tela(Screen):
     def pesquisar_contato(self):
         print('Executando pesquisar_contato')
         texto = self.ids.nome_fantasia.text
+        items=[]
         for cliente in self.dados_clientes:
             if texto == cliente['nome_fantasia']:
                 dados = cliente
                 nome_1, nome_2, nome_3= dados['nome_1'], dados['nome_2'], dados['nome_3']
 
-                items=[]
+                
                 for nome in [nome_1, nome_2, nome_3]:
                     if len(nome) != 0:
                         items.append(Item_contato(text=nome))
@@ -151,7 +152,7 @@ class Visita_tela(Screen):
             app.root.get_screen('Visitas_tela').buscar()
         # Voltar a tela anterior
         app.root.transition.direction = 'right'
-        app.root.current = 'Visitas_tela'
+        app.root.current = app.telas[-2] # 'Visitas_tela'
 
     def adicionar_nome_fantasia(self):
         app = MDApp.get_running_app()
