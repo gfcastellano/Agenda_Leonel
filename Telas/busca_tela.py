@@ -64,7 +64,7 @@ class Busca_tela(Screen):
         match = MDApp.get_running_app().dados_clientes
         for item in dicionario:
             print('Buscando por item:', item)
-            print('Tamanho do match:', len(match))
+            print('Clientes na busca:', len(match))
             for cliente in match:                
                 if item == 'telefone':
                     if (str(dicionario[item]).lower() not in str(cliente['telefone_fixo']).lower()) and\
@@ -83,8 +83,11 @@ class Busca_tela(Screen):
                        (str(dicionario[item]).lower() not in str(cliente['tipo_3']).lower()):
                         retirar.append(cliente)
                 else:
-                    if str(dicionario[item]).lower() not in str(cliente[item]).lower():
+                    print(str(dicionario[item]).lower(), '         |         ',str(cliente[item]).lower(), '         |         ',str(cliente['nome_fantasia']))
+                    if str(dicionario[item]).lower() != str(cliente[item]).lower():
                         retirar.append(cliente)
+                    else:
+                        print(cliente['nome_fantasia'],' | ',cliente[item])
                         
             print('Tamanho de retirar:', len(retirar))
             for x in retirar:

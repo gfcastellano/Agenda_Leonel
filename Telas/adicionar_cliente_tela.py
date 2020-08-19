@@ -99,10 +99,10 @@ class Adicionar_cliente_tela(Screen):
             novo_cliente['pet_shop']       = self.ids.pet_shop.active
             novo_cliente['clinica']        = self.ids.clinica.active
 
-            novo_cliente['cliente']        = ''
-            novo_cliente['therapet']       = ''
-            novo_cliente['tesoura']        = ''
-            novo_cliente['tap_higienico']  = ''
+            novo_cliente['cliente']        = False
+            novo_cliente['therapet']       = False
+            novo_cliente['tesoura']        = False
+            novo_cliente['tap_higienico']  = False
 
             endereco_completo = novo_cliente['endereco'] + ', ' + novo_cliente['numero'] + ' - ' + novo_cliente['bairro'] + ' - ' + novo_cliente['cidade']
             endereco = parse.quote(endereco_completo)
