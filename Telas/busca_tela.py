@@ -61,7 +61,7 @@ class Busca_tela(Screen):
             print('\t',key,' --> ',value)
 
         retirar=[]
-        match = MDApp.get_running_app().dados_clientes
+        match = self.dados_clientes.copy()
         for item in dicionario:
             print('Buscando por item:', item)
             print('Clientes na busca:', len(match))
@@ -83,11 +83,12 @@ class Busca_tela(Screen):
                        (str(dicionario[item]).lower() not in str(cliente['tipo_3']).lower()):
                         retirar.append(cliente)
                 else:
-                    print(str(dicionario[item]).lower(), '         |         ',str(cliente[item]).lower(), '         |         ',str(cliente['nome_fantasia']))
+                    #print(str(dicionario[item]).lower(), '         |         ',str(cliente[item]).lower(), '         |         ',str(cliente['nome_fantasia']))
                     if str(dicionario[item]).lower() != str(cliente[item]).lower():
                         retirar.append(cliente)
                     else:
-                        print(cliente['nome_fantasia'],' | ',cliente[item])
+                        pass
+                        #print(cliente['nome_fantasia'],' | ',cliente[item])
                         
             print('Tamanho de retirar:', len(retirar))
             for x in retirar:
@@ -98,7 +99,7 @@ class Busca_tela(Screen):
         clientes_tela.apagar_clientes()
         clientes_tela.adicionar_clientes(match)
         clientes_tela.apagar_texto()
-        MDApp.get_running_app().carregar_clientes() #Não entendo pq dá um erro se não executar isso.
+        #MDApp.get_running_app().carregar_clientes() #Não entendo pq dá um erro se não executar isso.
         # Ele usa o match que é passado na chamada da função acima e instaura o Clientes_tela.dados_clientes como match.
         MDApp.get_running_app().root.transition.direction = 'left'
         MDApp.get_running_app().root.current = 'Clientes_tela'

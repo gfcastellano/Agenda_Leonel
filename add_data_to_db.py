@@ -85,9 +85,9 @@ url_db = 'https://agenda-leonel.firebaseio.com/users/'
 user_id = 'I10r2hxrlpU6Qmsf9DELnMcH9D22/'
 
 
-with open('clientes.json', 'r') as file:
+"""with open('clientes.json', 'r') as file:
     dados_clientes = json.load(file)
-    print('clientes.json carregado com sucesso,' 'tamanho:',len(dados_clientes))
+    print('clientes.json carregado com sucesso,' 'tamanho:',len(dados_clientes))"""
 """ 
 for cliente in dados_clientes:
     dados ={
@@ -132,7 +132,7 @@ for cliente in dados_clientes:
 
     }
  """
-dicionario = {
+""" dicionario = {
         'codigo':  '',
         'nome_fantasia' :'',
         'endereco'      :'',
@@ -152,7 +152,7 @@ dicionario = {
 }
 
 for key in dicionario.keys():
-    print(key)
+    print(key) """
 """ 
 to_database = json.dumps(dados)
 print('to_database:',to_database) """
