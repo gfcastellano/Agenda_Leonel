@@ -26,20 +26,7 @@ import requests
 from pprint import pprint
 
 
-""" import firebase_admin
-from firebase_admin import credentials, firestore """
 
-""" cred = credentials.Certificate("agenda-ece58-firebase-adminsdk-39kgg-96d30e3987.json")
-firebase_admin.initialize_app(cred)
-
-
-# Acessando a base de dados
-db = firestore.client()
-
-
-# Passar informações de clientes para base de dados
-
- """
 class Gerenciador(ScreenManager):
     pass
 
@@ -53,8 +40,8 @@ class MainApp(MDApp):
     # Firebase ####
     wak = 'AIzaSyC0GelFxio_-FBRYcME63Xqtepk9Q_6E3s' # Web API Key do projeto no firebase
     url_db = 'https://agenda-leonel.firebaseio.com/users/'
-    user_id = 'I10r2hxrlpU6Qmsf9DELnMcH9D22/'
     ################
+
     path = ''
     
     
@@ -215,15 +202,20 @@ class MainApp(MDApp):
         #print('+++++++++++++++++++++++++++')
 
     def get(self):
-        # Acessa a base de dados e recupera as informações dos clientes
-        response = requests.get(url = self.url_db + self.local_id + '/clientes' + '.json?auth=' + self.id_token)
-        print('Fez o request dos clientes?',response.ok)
-        self.dados_clientes = json.loads(response.content.decode())
-        # Acessa a base de dados e recupera as informações das visitas
-        response = requests.get(url = self.url_db + self.local_id + '/visitas' + '.json?auth=' + self.id_token)
-        print('Fez o request das visitas?',response.ok)
-        #print(json.loads(response.content.decode()))
-        self.dados_visitas = json.loads(response.content.decode())
+        try:
+            # Acessa a base de dados e recupera as informações dos clientes
+            response = requests.get(url = self.url_db + self.local_id + '/clientes' + '.json?auth=' + self.id_token)
+            print('Fez o request dos clientes?',response.ok)
+            self.dados_clientes = json.loads(response.content.decode())
+            # Acessa a base de dados e recupera as informações das visitas
+            response = requests.get(url = self.url_db + self.local_id + '/visitas' + '.json?auth=' + self.id_token)
+            print('Fez o request das visitas?',response.ok)
+            #print(json.loads(response.content.decode()))
+            self.dados_visitas = json.loads(response.content.decode())
+        except: #id_token expirou, pegar novo id_token e re-executar a 
+            # Use refresh token to get a new idToken
+            self.id_token, self.local_id = self.trocar_refresh_token(refresh_token)
+            self.get()
     
     def patch(self, dados):
         print('Executando o patch()')
@@ -291,11 +283,9 @@ class MainApp(MDApp):
                                     data = to_database)
             print('Criou novo usuário na base de dados?', response.ok)
             print(json.loads(response.content.decode()))
-            """ # Get friend ID
-            # Get request on firebase to get the next friend id
-            self.friend_get_req = UrlRequest(sel.url_db + idToken, ca_file=certifi.where(), on_success=self.on_friend_get_req_ok, on_error=self.on_error, on_failure=self.on_error)
- """
+            
             app.root.current = 'Menu_tela'
+
         elif sign_up_request.ok == False:
             error_data = json.loads(sign_up_request.content.decode())
             error_message = error_data["error"]['message']
