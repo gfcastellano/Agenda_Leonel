@@ -143,3 +143,8 @@
     on_release: 
         root.preencher_contato(self.text)
         app.root.get_screen('Visita_tela').popup_pesquisa_contato.dismiss()
+
+<Item_visita>:
+    on_release: 
+        root.preencher_visita(self.text)
+        app.root.get_screen('Visita_tela').popup_pesquisa_visita.dismiss()

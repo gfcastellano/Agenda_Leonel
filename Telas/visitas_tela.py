@@ -42,10 +42,11 @@ class Visitas_tela(Screen):
             scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for visita in reversed(dados_visitas):
             #print(visita)
-            dia  = visita['data'][-2:]
-            mes  = visita['data'][-5:-3]
-            ano  = visita['data'][-10:-6]
-            data = dia + '/' + mes + '/' + ano
+            #dia  = visita['data'][-2:]
+            #mes  = visita['data'][-5:-3]
+            #ano  = visita['data'][-10:-6]
+            #data = dia + '/' + mes + '/' + ano
+            data=visita['data']
             scroll.add_widget(Visita(data = data,
                                      nome_fantasia = visita['nome_fantasia'],                                     
                                      identificador = str(visita['identificador']),
@@ -59,10 +60,11 @@ class Visitas_tela(Screen):
             visitas_tab.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for visita in reversed(dados_visitas):
             #print(visita)
-            dia  = visita['data'][-2:]
-            mes  = visita['data'][-5:-3]
-            ano  = visita['data'][-10:-6]
-            data = dia + '/' + mes + '/' + ano
+            #dia  = visita['data'][-2:]
+            #mes  = visita['data'][-5:-3]
+            #ano  = visita['data'][-10:-6]
+            #data = dia + '/' + mes + '/' + ano
+            data=visita['data']
             visitas_tab.add_widget(Visita(data = data,
                                           nome_fantasia = visita['nome_fantasia'],
                                           identificador = str(visita['identificador']),

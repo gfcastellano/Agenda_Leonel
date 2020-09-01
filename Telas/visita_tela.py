@@ -118,7 +118,7 @@ class Visita_tela(Screen):
 
     def pesquisar_visita(self):
         print('Executando pesquisar_visita')
-        items=[Item_contato(text='Presencial'),Item_contato(text='Ligação'),Item_contato(text="Whats"),Item_contato(text="E-mail")]
+        items=[Item_visita(text='Presencial'),Item_visita(text='Ligação'),Item_visita(text="Whats"),Item_visita(text="E-mail")]
         
         self.popup_pesquisa_visita = MDDialog(
             title="Tipos de visita",
@@ -192,5 +192,13 @@ class Item_contato(OneLineAvatarListItem):
     def preencher_contato(self,text):
         print('Executando preencher_contato')
         MDApp.get_running_app().root.get_screen('Visita_tela').ids.contato.text = text
+
+class Item_visita(OneLineAvatarListItem):
+    divider = None
+    source = StringProperty()
+
+    def preencher_visita(self,text):
+        print('Executando preencher_visita')
+        MDApp.get_running_app().root.get_screen('Visita_tela').ids.visita.text = text
 
     
