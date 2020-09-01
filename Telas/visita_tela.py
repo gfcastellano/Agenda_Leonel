@@ -17,6 +17,7 @@ from pprint import pprint
 class Visita_tela(Screen):
     popup_pesquisa_cliente=None
     popup_pesquisa_contato=None
+    popup_pesquisa_visita=None
 
     def on_pre_enter(self):
         print('Entrando em Visita_tela')
@@ -114,6 +115,16 @@ class Visita_tela(Screen):
             type="simple",
             items=items)
         self.popup_pesquisa_contato.open()
+
+    def pesquisar_visita(self):
+        print('Executando pesquisar_visita')
+        items=[Item_contato(text='Presencial'),Item_contato(text='Ligação'),Item_contato(text="Whats"),Item_contato(text="E-mail")]
+        
+        self.popup_pesquisa_visita = MDDialog(
+            title="Contatos cadastrados para esse cliente",
+            type="simple",
+            items=items)
+        self.popup_pesquisa_visita.open()
 
     def adicionar_visita(self):
         print("Execuntando adicionar_visita")

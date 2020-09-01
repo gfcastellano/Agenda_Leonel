@@ -51,7 +51,7 @@
                             icon: 'calendar'
                             on_release: root.abrir_popup_data()
                             pos_hint:{'center_y':0.5}
-                        MDLabel:
+                        MDTextField:
                             id: data	
                             halign: 'center'
                     BoxLayout:
@@ -87,11 +87,18 @@
                         MDTextField:
                             size_hint_x: 3
                             id: visita
-                    MDLabel:
-                        text: ' Informações:'
-                    MDTextField:
-                        multiline: True
-                        id: informacoes
+                        MDIconButton:
+                            icon: 'text-search'	
+                            on_release: root.pesquisar_visita()
+                            pos_hint: {'center_y':0.5}
+                    BoxLayout:
+                        MDLabel:
+                            text: ' Informações:'
+                            size_hint_x: 1
+                        MDTextField:
+                            multiline: True
+                            id: informacoes
+                            size_hint_x: 3
                     MDSeparator:
                         height: "20dp"
                     BoxLayout:
