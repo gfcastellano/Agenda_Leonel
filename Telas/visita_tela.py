@@ -121,7 +121,7 @@ class Visita_tela(Screen):
         items=[Item_contato(text='Presencial'),Item_contato(text='Ligação'),Item_contato(text="Whats"),Item_contato(text="E-mail")]
         
         self.popup_pesquisa_visita = MDDialog(
-            title="Contatos cadastrados para esse cliente",
+            title="Tipos de visita",
             type="simple",
             items=items)
         self.popup_pesquisa_visita.open()
