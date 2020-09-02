@@ -58,4 +58,128 @@
         on_release: 
             app.root.transition.direction = 'left'
             root.ir_para_lembrete_tela()
+
+
+<Lembrete>:
+    size_hint_y: None
+    height: self.minimum_height
+    orientation: 'vertical'
+    on_release: self.abrir_lembrete(self)
+    GridLayout:
+        rows: 5
+        cols: 2
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        padding: 30
+        MDLabel:
+            text: 'Identificador: '
+            halign: 'left'
+            valign: 'bottom'
+            size_hint_x: 3
+            color: app.theme_cls.primary_dark
+            bold: True
+            height: 60
+            size_hint_y: None
+        MDLabel:
+            id: identificador
+            halign: 'left'
+            size_hint_x: 6
+            color: app.theme_cls.primary_dark
+            bold: True
+            height: 60
+            size_hint_y: None
+        MDLabel:
+            id: data
+            halign: 'left'
+            valign: 'bottom'
+            size_hint_x: 3
+            color: app.theme_cls.primary_dark
+            bold: True
+        MDLabel:
+            id: nome_fantasia
+            halign: 'left'
+            size_hint_x: 6
+            color: app.theme_cls.primary_dark
+            bold: True
+        MDLabel:
+            text: 'Contato:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: contato
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'
+        MDLabel:
+            text: 'Lembrete:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: lembrete
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'
+        #MDLabel:
+        #    text: 'Informações:'
+        #    halign:'left'
+        #    valign: 'top'
+        #    size_hint_y: None
+        #    bold: True
+        #MDLabel:
+        #    id: informacoes
+        #    halign:'left'
+        #    multiline: True
+        #    text_size: self.width, None
+        #    size_hint: 1, None
+        #    height: self.texture_size[1]
+
+    MDSeparator:
+        height: "10dp"
+
+
+<Content>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: "200dp"
+    BoxLayout:
+        MDLabel:
+            text: ' Data:'
+        MDTextField:
+            size_hint_x:2
+    BoxLayout:
+        MDLabel:
+            text: ' Cliente:'
+        MDTextField:
+            text: 'Nome Fantasia'
+            size_hint_x:2
+    BoxLayout:
+        MDLabel:
+            text: 'Contato:'
+            halign: 'center'
+        MDLabel:
+            text: 'Telefone:'
+            halign: 'center'
+        MDLabel:
+            text: 'Tipo:'
+            halign: 'center'
+    BoxLayout:
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+    BoxLayout:
+        MDLabel:
+            text: " Visita:"
+            size_hint_x: None
+        MDTextField:
+            #size_hint_x: 2
  

@@ -36,6 +36,7 @@ class Gerenciador(ScreenManager):
 class MainApp(MDApp):
     dados_clientes =[]
     dados_visitas=[]
+    dados_lembretes=[]
     popup_leituradados = None
     telas = ['Menu_tela']
 
@@ -214,6 +215,10 @@ class MainApp(MDApp):
             print('Fez o request das visitas?',response.ok)
             #print(json.loads(response.content.decode()))
             self.dados_visitas = json.loads(response.content.decode())
+            response = requests.get(url = self.url_db + self.local_id + '/lembretes' + '.json?auth=' + self.id_token)
+            print('Fez o request dos lembretes?',response.ok)
+            #print(json.loads(response.content.decode()))
+            self.dados_lembretes = json.loads(response.content.decode())
         except: #id_token expirou, pegar novo id_token e re-executar a 
             # Use refresh token to get a new idToken
             self.id_token, self.local_id = self.trocar_refresh_token(refresh_token)

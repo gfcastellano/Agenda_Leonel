@@ -10,6 +10,7 @@ from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 
+
 class Lembretes_tela(Screen):
     data={'card-plus-outline': 'Adicionar Lembrete'}
     primeiro_dia=''
@@ -31,6 +32,7 @@ class Lembretes_tela(Screen):
         
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
+        self.dados_lembretes = app.dados_lembretes
         if app.telas[-2] == 'Menu_tela':
             self.ids.buscar.text = ''
             self.apagar_lembretes()
@@ -39,20 +41,32 @@ class Lembretes_tela(Screen):
 
 
     def adicionar_lembretes(self, dados_lembretes):
+        import time
         print('Adicionando lembretes na tela Lembretes_tela')
         scroll = MDApp.get_running_app().root.get_screen('Lembretes_tela').ids.box_scroll
         if len(dados_lembretes) == 0: #Caso ele receba um match que contem nada
-            scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
-        for lembrete in reversed(dados_lembretes):
-            #print(visita)
-            data=lembrete['data']
-            scroll.add_widget(Visita(data = data,
-                                     nome_fantasia = lembrete['nome_fantasia'],                                     
-                                     identificador = str(lembrete['identificador']),
-                                     contato = lembrete['contato'],
-                                     informacoes = lembrete['informacoes'],
-                                     lembrete = lembrete['visita']))
+            scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))   
+        for data in self.ordenar_lembretes(dados_lembretes):
+            #print('A data é:',time.strftime('%d/%m/%Y', data))
+            for lembrete in dados_lembretes:
+                #print('O lembrete é:',lembrete)
+                #print('A data_lembrete é', lembrete['data_lembrete'])
+                if time.strftime('%d/%m/%Y', data) == str(lembrete['data_lembrete']):
+                    data=lembrete['data_lembrete']
+                    #print(data)    
+                    scroll.add_widget(Lembrete(data = data,
+                                            nome_fantasia = lembrete['nome_fantasia'],                                     
+                                            contato = lembrete['contato'],
+                                            lembrete = lembrete['lembrete'],
+                                            informacoes = lembrete['informacoes'],
+                                            identificador = str(lembrete['identificador'])))
+                    break
+                else:
+                    #print('Não deu match da data')
+                    pass
 
+                                    
+          
         
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
@@ -77,12 +91,7 @@ class Lembretes_tela(Screen):
         match=[]
         app = MDApp.get_running_app()
 
-        #################################################
-        try:
-            self.dados_lembretes = app.dados_lembretes
-        except:
-            print('Passou')
-        #############################################   
+        self.dados_lembretes = app.dados_lembretes 
         
         for lembrete in self.dados_lembretes:
             if parametro == 'codigo':
@@ -96,45 +105,45 @@ class Lembretes_tela(Screen):
         if self.ids.data.text != '':  #Verifica se tem a condição de data
             if len(self.ids.data.text) > 10: #verifica se tem uma ou duas datas
                 if self.ordem == 'primeiro':
-                    menor_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
-                    maior_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                    menor_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+                    maior_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
                 else:
-                    maior_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
-                    menor_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                    maior_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+                    menor_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
                 #print(menor_data, maior_data)
                 for visita in match:
-                    if int(visita['data'][:4]) < int(menor_data[:4]): #verificando ano
+                    if int(visita['data'][-4:]) < int(menor_data[-4:]): #verificando ano
                         remover.append(visita)
                     else:
-                        if int(visita['data'][:4]) == int(menor_data[:4]) and \
-                           int(visita['data'][5:7]) < int(menor_data[5:7]):  #verificando mes
+                        if int(visita['data'][-4:]) == int(menor_data[-4:]) and \
+                           int(visita['data'][3:5]) < int(menor_data[3:5]):  #verificando mes
                             if visita in remover:
                                 continue
                             else:
                                 remover.append(visita)
                         else:
-                            if int(visita['data'][:4]) == int(menor_data[:4]) and \
-                               int(visita['data'][5:7]) == int(menor_data[5:7]) and \
-                               int(visita['data'][8:]) < int(menor_data[8:]): #verificando dia
+                            if int(visita['data'][-4:]) == int(menor_data[-4:]) and \
+                               int(visita['data'][3:5]) == int(menor_data[3:5]) and \
+                               int(visita['data'][:2]) < int(menor_data[:2]): #verificando dia
                                 if visita in remover:
                                     continue
                                 else:
                                     remover.append(visita)
-                    if int(visita['data'][:4]) > int(maior_data[:4]): #verificando ano
+                    if int(visita['data'][-4:]) > int(maior_data[-4:]): #verificando ano
                         if visita in remover:
                                 continue
                         else:
                             remover.append(visita)
                     else:
-                        if int(visita['data'][:4]) == int(maior_data[:4]) and \
-                           int(visita['data'][5:7]) > int(maior_data[5:7]): #verificando mes
+                        if int(visita['data'][-4:]) == int(maior_data[-4:]) and \
+                           int(visita['data'][3:5]) > int(maior_data[3:5]): #verificando mes
                             if visita in remover:
                                 continue
                             else:
                                 remover.append(visita)
-                        elif int(visita['data'][:4]) == int(maior_data[:4]) and \
-                            int(visita['data'][5:7]) == int(maior_data[5:7]) and \
-                            int(visita['data'][8:]) > int(maior_data[8:]):                             
+                        elif int(visita['data'][-4:]) == int(maior_data[-4:]) and \
+                            int(visita['data'][3:5]) == int(maior_data[3:5]) and \
+                            int(visita['data'][:2]) > int(maior_data[:2]):                             
                             if visita in remover:
                                 continue
                             else:
@@ -142,9 +151,9 @@ class Lembretes_tela(Screen):
             else: #significa que só tem uma data na busca
                 data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
                 #print(data)
-                for visita in self.dados_visitas:
-                    if visita['data'] != data:
-                        remover.append(visita)       
+                for lembrete in self.dados_lembretes:
+                    if lembrete['data'] != data:
+                        remover.append(lembrete)
         
         for lembrete in remover:
             try:
@@ -266,21 +275,32 @@ class Lembretes_tela(Screen):
             )
         self.popup_lembrete.open()
 
+    def ordenar_lembretes(self, dados_lembretes):
+        datas=[]
+        import time
+        for lembrete in dados_lembretes:
+            try:
+                #print(time.strptime(str(lembrete['data_lembrete']), '%d/%m/%Y'))
+                datas.append(time.strptime(str(lembrete['data_lembrete']), '%d/%m/%Y'))
+            except:
+                pass
+        #print(datas)
+        #print(len(datas))
+        #print(type(datas))
+        #print(sorted(datas))
+        return sorted(datas)
+
     
-        
-
-
 
 class Lembrete(MDCard):
     def __init__(self,data='', nome_fantasia='',contato='',lembrete='', informacoes='',identificador='',**kwargs):
         super().__init__(**kwargs)
-        self.ids.data.text          = data
-        #self.ids.codigo.text        = codigo
-        self.ids.nome_fantasia.text = nome_fantasia
-        self.ids.contato.text       = contato
-        self.ids.lembrete.text        = lembrete
-        self.ids.informacoes.text   = informacoes
-        self.ids.identificador.text = identificador
+        self.ids.data.text ,self.data         = data,data
+        self.ids.nome_fantasia.text ,self.nome_fantasia  = nome_fantasia,nome_fantasia
+        self.ids.contato.text ,self.contato        = contato,contato
+        self.ids.lembrete.text ,self.lembrete         = lembrete,lembrete
+        #self.ids.informacoes.text  ,self.informacoes   = informacoes,informacoes
+        self.ids.identificador.text  ,self.identificador = identificador,identificador
 
     def abrir_lembrete(self, objeto):
         print('Executando abrir_lembrete')
@@ -289,6 +309,7 @@ class Lembrete(MDCard):
         app.root.current = 'Lembrete_tela'
         app.root.get_screen('Lembrete_tela').adicionar_infos(self)
 
+    
 
 class Content(BoxLayout):
     pass

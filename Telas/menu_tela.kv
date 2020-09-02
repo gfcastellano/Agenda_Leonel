@@ -46,3 +46,6 @@
         MDRaisedButton:
             text: 'Sair'
             on_release: app.stop()
+        MDRaisedButton:
+            text: 'Ordenar'
+            on_release: app.root.get_screen('Lembretes_tela').ordenar_lembretes()

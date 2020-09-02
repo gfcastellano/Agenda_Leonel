@@ -107,45 +107,45 @@ class Visitas_tela(Screen):
         if self.ids.data.text != '':  #Verifica se tem a condição de data
             if len(self.ids.data.text) > 10: #verifica se tem uma ou duas datas
                 if self.ordem == 'primeiro':
-                    menor_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
-                    maior_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                    menor_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+                    maior_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
                 else:
-                    maior_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
-                    menor_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                    maior_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+                    menor_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
                 #print(menor_data, maior_data)
                 for visita in match:
-                    if int(visita['data'][:4]) < int(menor_data[:4]): #verificando ano
+                    if int(visita['data'][-4:]) < int(menor_data[-4:]): #verificando ano
                         remover.append(visita)
                     else:
-                        if int(visita['data'][:4]) == int(menor_data[:4]) and \
-                           int(visita['data'][5:7]) < int(menor_data[5:7]):  #verificando mes
+                        if int(visita['data'][-4:]) == int(menor_data[-4:]) and \
+                           int(visita['data'][3:5]) < int(menor_data[3:5]):  #verificando mes
                             if visita in remover:
                                 continue
                             else:
                                 remover.append(visita)
                         else:
-                            if int(visita['data'][:4]) == int(menor_data[:4]) and \
-                               int(visita['data'][5:7]) == int(menor_data[5:7]) and \
-                               int(visita['data'][8:]) < int(menor_data[8:]): #verificando dia
+                            if int(visita['data'][-4:]) == int(menor_data[-4:]) and \
+                               int(visita['data'][3:5]) == int(menor_data[3:5]) and \
+                               int(visita['data'][:2]) < int(menor_data[:2]): #verificando dia
                                 if visita in remover:
                                     continue
                                 else:
                                     remover.append(visita)
-                    if int(visita['data'][:4]) > int(maior_data[:4]): #verificando ano
+                    if int(visita['data'][-4:]) > int(maior_data[-4:]): #verificando ano
                         if visita in remover:
                                 continue
                         else:
                             remover.append(visita)
                     else:
-                        if int(visita['data'][:4]) == int(maior_data[:4]) and \
-                           int(visita['data'][5:7]) > int(maior_data[5:7]): #verificando mes
+                        if int(visita['data'][-4:]) == int(maior_data[-4:]) and \
+                           int(visita['data'][3:5]) > int(maior_data[3:5]): #verificando mes
                             if visita in remover:
                                 continue
                             else:
                                 remover.append(visita)
-                        elif int(visita['data'][:4]) == int(maior_data[:4]) and \
-                            int(visita['data'][5:7]) == int(maior_data[5:7]) and \
-                            int(visita['data'][8:]) > int(maior_data[8:]):                             
+                        elif int(visita['data'][-4:]) == int(maior_data[-4:]) and \
+                            int(visita['data'][3:5]) == int(maior_data[3:5]) and \
+                            int(visita['data'][:2]) > int(maior_data[:2]):                             
                             if visita in remover:
                                 continue
                             else:

@@ -27,13 +27,7 @@ class Lembrete_tela(Screen):
         
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
-
-        #######################################
-        try:
-            self.dados_lembretes = app.dados_lembretes
-        except:
-            print('passou')
-        ########################################
+        self.dados_lembretes = app.dados_lembretes
 
 
         #data = date.today()
@@ -43,12 +37,15 @@ class Lembrete_tela(Screen):
         #self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
 
     def adicionar_infos(self,objeto):
+        print(objeto)
+        print(type(objeto))
+        print(objeto.nome_fantasia)
         self.ids.data.text    = objeto.ids.data.text
         #self.ids.codigo.text  = objeto.ids.codigo.text
         self.ids.nome_fantasia.text    = objeto.ids.nome_fantasia.text
         self.ids.contato.text    = objeto.ids.contato.text
-        self.ids.informacoes.text    = objeto.ids.informacoes.text
-        self.ids.lembrete.text    = objeto.ids.lembrete.text
+        #self.ids.informacoes.text    = objeto.ids.informacoes.text
+#        self.ids.visita.text    = objeto.ids.visita.text
         self.ids.identificador.text    = objeto.ids.identificador.text
 
     def limpar(self):
@@ -170,17 +167,17 @@ class Lembrete_tela(Screen):
             #self.dados_visitas.append(self.novo_visita)
             #pprint(novo_visita)
 
-        # Colocar dados no Firebase
-        app = MDApp.get_running_app()
-        app.patch(novo_visita)
-        # Requisitar dados novos
-        app.get()
-        # Repopular a tela anterior
-        if app.root.get_screen('Lembretes_tela').ids.buscar.text != '':
+            # Colocar dados no Firebase
+            app = MDApp.get_running_app()
+            app.patch(novo_visita)
+            # Requisitar dados novos
+            app.get()
+            # Repopular a tela anterior
+            #if app.root.get_screen('Lembretes_tela').ids.buscar.text != '':
             app.root.get_screen('Lembretes_tela').buscar()
-        # Voltar a tela anterior
-        app.root.transition.direction = 'right'
-        app.root.current = app.telas[-2] # 'Lembretes_tela'
+            # Voltar a tela anterior
+            app.root.transition.direction = 'right'
+            app.root.current = app.telas[-2] # 'Lembretes_tela'
 
     def adicionar_nome_fantasia(self):
         app = MDApp.get_running_app()
