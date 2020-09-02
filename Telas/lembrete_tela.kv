@@ -1,0 +1,152 @@
+<Lembrete_tela>:
+    BoxLayout:
+        orientation:'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Lembrete'
+            md_bg_color: app.theme_cls.primary_dark
+            size_hint_y: None
+            height: 150
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["content-save", lambda x: root.adicionar_lembrete()]]
+        
+#----------------------------------CONTEUDO DA VISITA
+        ScrollView:
+            BoxLayout:
+                id: box_scroll
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                MDCard:
+                    height: "600dp"
+                    orientation: 'vertical'
+                    padding: 8
+                    size_hint_y: None
+                    pos_hint:{'center_x':0.5,'center_y':0.5}
+                    BoxLayout:
+                        size_hint_y: None
+                        height: self.minimum_height
+                        size_hint_y: None
+                        height: 60
+                        MDLabel:
+                            text: 'Identificador:'
+                            width: root.ids.DATA.width
+                        MDLabel:
+                            id: identificador
+                            text: ''
+                    BoxLayout:
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            id: DATA
+                            text: ' Data:'
+                            halign: 'left'
+                            valign: 'center'
+                            text_size: None, self.height
+                            size_hint_x: None
+                            width: self.texture_size[0]   
+                        MDIconButton:
+                            icon: 'calendar'
+                            on_release: root.abrir_popup_data()
+                            pos_hint:{'center_y':0.5}
+                        MDTextField:
+                            id: data	
+                            halign: 'center'
+                    BoxLayout:
+                        MDLabelButton:
+                            text: 'Cliente:'
+                            size_hint_x: 1
+                            haling: 'bottom'
+                        MDTextField:
+                            id: nome_fantasia
+                            hint_text: 'Nome Fantasia'
+                            size_hint_x: 3
+                        MDIconButton:
+                            icon: 'account-search'	
+                            on_release: root.mostrar_popup()
+                            pos_hint: {'center_y':0.5}
+                    BoxLayout:
+                        MDLabel:
+                            text: 'Contato:'
+                            size_hint_x: 1
+                            haling: 'bottom'
+                        MDTextField:
+                            size_hint_x: 3
+                            id: contato
+                        MDIconButton:
+                            icon: 'account-search'	
+                            on_release: root.pesquisar_contato()
+                            pos_hint: {'center_y':0.5}
+                    BoxLayout:
+                        MDLabel:
+                            text: " Visita:"
+                            size_hint_x: 1
+                            haling: 'bottom'
+                        MDTextField:
+                            size_hint_x: 3
+                            id: visita
+                        MDIconButton:
+                            icon: 'text-search'	
+                            on_release: root.pesquisar_visita()
+                            pos_hint: {'center_y':0.5}
+                    BoxLayout:
+                        MDLabel:
+                            text: ' Informações:'
+                            size_hint_x: 1
+                        MDTextField:
+                            multiline: True
+                            id: informacoes
+                            size_hint_x: 3
+                    MDSeparator:
+                        height: "20dp"
+                    BoxLayout:
+                        MDLabel:
+                            text: ' Deseja marcar um lembrete?'
+                            size_hint_x: 4
+                        MDCheckbox:
+                            id: pergunta_lembrete
+                    MDLabel:
+                        text: ' Lembrete:'
+                    MDTextField:
+                        id: lembrete
+                        multiline: True
+                        lines: 3                    
+                    BoxLayout:
+                        MDLabel:
+                            text: 'Para o dia:'
+                            halign: 'left'
+                            valign: 'center'
+                            text_size: None, self.height
+                            size_hint_x: None
+                            width: self.texture_size[0]                            
+                        MDIconButton:
+                            icon: 'calendar'
+                            on_release: root.abrir_popup_data_lembrete()
+                            pos_hint:{'center_y':0.5}
+                        MDLabel:
+                            id: data_lembrete
+                            halign: 'center'                
+                MDLabel:
+                    size_hint_y: None
+                    height: 600
+                
+            
+<MDLabelButton@ButtonBehavior+MDLabel>:
+    halign: 'left'
+
+<Item_cliente_lembrete>:
+    on_release: 
+        root.preencher_cliente(self.text)
+        app.root.get_screen('Lembrete_tela').popup_pesquisa_cliente.dismiss()
+
+<Item_contato_lembrete>:
+    on_release: 
+        root.preencher_contato(self.text)
+        app.root.get_screen('Lembrete_tela').popup_pesquisa_contato.dismiss()
+
+<Item_visita_lembrete>:
+    on_release: 
+        root.preencher_visita(self.text)
+        app.root.get_screen('Lembrete_tela').popup_pesquisa_visita.dismiss()

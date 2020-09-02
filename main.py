@@ -17,6 +17,8 @@ from Telas.visitas_tela import Visitas_tela
 from kivymd.icon_definitions import md_icons
 from Telas.visita_tela import Visita_tela
 from Telas.login_tela import Login_tela
+from Telas.lembretes_tela import Lembretes_tela
+from Telas.lembrete_tela import Lembrete_tela
 
 from kivy.core.window import Window
 Window.softinput_mode = 'below_target'
@@ -224,13 +226,15 @@ class MainApp(MDApp):
         print('to_database:',to_database)
         try:
             codigo = int(dados['codigo'])
+            print('Encontrou codigo. Ou seja, um cliente foi passado para o app.patch()')
+            print('o código encontrado foi:',codigo)
         except:
             pass
         nome_fantasia = str(dados['nome_fantasia'])
         data = str(dados['data'])
         try:
             index = str(dados['identificador'])
-            print('Encontrou index. Ou seja, uma visita foi passada para essa função')
+            print('Encontrou index. Ou seja, uma visita ou um lembrete foi passada para o app.patch()')
         except:
             pass
         #print(type(to_database))
@@ -239,16 +243,35 @@ class MainApp(MDApp):
         #print(list(dados.keys()))
 
         # Testa se é um dado de visita ou de cliente que foi enviado
-        if 'visita' not in list(dados.keys()):
-            print('Iniciou o patch')
-            response = requests.patch(url = self.url_db + self.local_id + '/clientes/' + str(codigo - 1) + '.json?auth=' + self.id_token,
-                                    data = to_database)
-            print('Fez o patch dos clientes?', response.ok)
-            #print('Conteudo', response.content.decode())
-        else:
+        print('Iniciou o patch')
+        print(list(dados.keys()))
+
+        if 'visita' in list(dados.keys()) and 'lembrete' in list(dados.keys()):
             response = requests.patch(url = self.url_db + self.local_id + '/visitas/' + index + '.json?auth=' + self.id_token,
                                     data = to_database)
             print('Fez o patch das visitas?', response.ok)
+            #print('Conteudo', response.content.decode())
+            response = requests.patch(url = self.url_db + self.local_id + '/lembretes/' + index + '.json?auth=' + self.id_token,
+                                    data = to_database)
+            print('Fez o patch dos lembretes?', response.ok)
+            #print('Conteudo', response.content.decode())
+        
+        elif 'lembrete' in list(dados.keys()):
+            response = requests.patch(url = self.url_db + self.local_id + '/lembretes/' + index + '.json?auth=' + self.id_token,
+                                    data = to_database)
+            print('Fez o patch dos lembretes?', response.ok)
+            #print('Conteudo', response.content.decode())
+
+        elif 'visita' in list(dados.keys()):
+            response = requests.patch(url = self.url_db + self.local_id + '/visitas/' + index + '.json?auth=' + self.id_token,
+                                    data = to_database)
+            print('Fez o patch das visitas?', response.ok)
+            #print('Conteudo', response.content.decode())
+        
+        else:            
+            response = requests.patch(url = self.url_db + self.local_id + '/clientes/' + str(codigo - 1) + '.json?auth=' + self.id_token,
+                                    data = to_database)
+            print('Fez o patch dos clientes?', response.ok)
             #print('Conteudo', response.content.decode())
 
 
