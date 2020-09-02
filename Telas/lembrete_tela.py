@@ -147,8 +147,8 @@ class Lembrete_tela(Screen):
         
 
 
-        if data == '' or nome_fantasia == '' or lembrete == '' or data_lembrete == '':
-            #self.abrir_popup_infos()
+        if nome_fantasia == '' or lembrete == '' or data_lembrete == '':
+            self.abrir_popup_infos()
             print('Não existem os dados mínimos necessários, não salvando as alterações')
         else:
             print("Existem dados mínimos necessários para adicionar lembrete")
@@ -178,6 +178,29 @@ class Lembrete_tela(Screen):
             # Voltar a tela anterior
             app.root.transition.direction = 'right'
             app.root.current = app.telas[-2] # 'Lembretes_tela'
+    def abrir_popup_infos(self):
+        if not self.popup_infos:
+            self.popup_infos = MDDialog( size_hint = [0.8,0.8],
+                title= 'ERRO',
+                text = ('Há informações que necessitam ser inseridas.' \
+                        ' \n' 
+                        'Verifique se foram inseridos: \n'
+                        ' - nome_fantasia \n' 
+                        ' - lembrete \n' 
+                        ' - data_lembrete \n' ),
+                        #' - Bairro \n' 
+                        #' - Cidade'),
+                buttons=[MDRaisedButton(
+                        text="OK", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_info
+                    ),
+                    MDLabel(
+                        text='')
+                ],
+            )
+        self.popup_infos.open()
+
+    def fechar_info(self, *args):
+        self.popup_infos.dismiss()
 
     def adicionar_nome_fantasia(self):
         app = MDApp.get_running_app()

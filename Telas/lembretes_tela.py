@@ -49,7 +49,8 @@ class Lembretes_tela(Screen):
         for data in self.ordenar_lembretes(dados_lembretes):
             #print('A data é:',time.strftime('%d/%m/%Y', data))
             for lembrete in dados_lembretes:
-                #print('O lembrete é:',lembrete)
+                #print('O lembrete é:',lembrete['identificador'])            
+            
                 #print('A data_lembrete é', lembrete['data_lembrete'])
                 if time.strftime('%d/%m/%Y', data) == str(lembrete['data_lembrete']):
                     data=lembrete['data_lembrete']
@@ -60,6 +61,8 @@ class Lembretes_tela(Screen):
                                             lembrete = lembrete['lembrete'],
                                             informacoes = lembrete['informacoes'],
                                             identificador = str(lembrete['identificador'])))
+                    #print('Será excluido este lembrete da lista:', lembrete['identificador'])
+                    dados_lembretes.remove(lembrete)
                     break
                 else:
                     #print('Não deu match da data')
@@ -287,7 +290,8 @@ class Lembretes_tela(Screen):
         #print(datas)
         #print(len(datas))
         #print(type(datas))
-        #print(sorted(datas))
+        from pprint import pprint
+        pprint(sorted(datas))
         return sorted(datas)
 
     
