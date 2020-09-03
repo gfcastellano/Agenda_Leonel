@@ -14,11 +14,21 @@
         #margin: 120, 0, 0, 0
         #padding: 20,20,20,20
         #spacing: 50
-        size_hint_y: 0.9
+        size_hint_y: None
+        height: root.height - 150
         BoxLayout:
             #padding: 40
             #spacing: 40
             orientation: 'vertical'
+            BoxLayout:
+                spacing:20,0
+                BotoesDireita:
+                    icon: ''
+                    on_release: 
+                MDLabel:
+                    text: ''
+                    pos_hint: {'center_y':0.5}
+                    on_release: 
             BoxLayout:
                 spacing:20,0
                 BotoesDireita:
@@ -32,6 +42,15 @@
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Busca_tela'
+            BoxLayout:
+                spacing:20,0
+                BotoesDireita:
+                    icon: ''
+                    on_release: 
+                MDLabel:
+                    text: ''
+                    pos_hint: {'center_y':0.5}
+                    on_release: 
             BoxLayout:
                 spacing:20,0
                 BotoesDireita:
