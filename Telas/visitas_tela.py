@@ -36,23 +36,30 @@ class Visitas_tela(Screen):
 
 
     def adicionar_visitas(self, dados_visitas):
+        import time
         print('Adicionando visitas na tela Visitas_tela')
         scroll = MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll
         if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
             scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
-        for visita in reversed(dados_visitas):
-            #print(visita)
-            #dia  = visita['data'][-2:]
-            #mes  = visita['data'][-5:-3]
-            #ano  = visita['data'][-10:-6]
-            #data = dia + '/' + mes + '/' + ano
-            data=visita['data']
-            scroll.add_widget(Visita(data = data,
-                                     nome_fantasia = visita['nome_fantasia'],                                     
-                                     identificador = str(visita['identificador']),
-                                     contato = visita['contato'],
-                                     informacoes = visita['informacoes'],
-                                     visita = visita['visita']))
+        for data in self.ordenar_visitas(dados_visitas):
+            for visita in reversed(dados_visitas):
+                if time.strftime('%d/%m/%Y', data) == str(visita['data']):
+                    #print('VISITA:',visita)
+                    #dia  = visita['data'][-2:]
+                    #mes  = visita['data'][-5:-3]
+                    #ano  = visita['data'][-10:-6]
+                    #data = dia + '/' + mes + '/' + ano
+                    data=visita['data']
+                    scroll.add_widget(Visita(data = data,
+                                            nome_fantasia = visita['nome_fantasia'],                                     
+                                            identificador = str(visita['identificador']),
+                                            contato = visita['contato'],
+                                            informacoes = visita['informacoes'],
+                                            visita = visita['visita']))
+                    break
+                else:
+                    #print('Não deu match da data')
+                    pass
 
         #Adicionando visitas na visitas_tab
         visitas_tab = MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll
@@ -280,6 +287,23 @@ class Visitas_tela(Screen):
                 ],
             )
         self.popup_visita.open()
+
+
+    def ordenar_visitas(self, dados_visitas):
+        datas=[]
+        import time
+        for visita in dados_visitas:
+            try:
+                #print(time.strptime(str(lembrete['data_lembrete']), '%d/%m/%Y'))
+                datas.append(time.strptime(str(visita['data']), '%d/%m/%Y'))
+            except:
+                pass
+        #print(datas)
+        #print(len(datas))
+        #print(type(datas))
+        from pprint import pprint
+        #pprint(sorted(datas))
+        return reversed(sorted(datas))
 
     
         
