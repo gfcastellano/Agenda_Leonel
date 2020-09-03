@@ -114,7 +114,7 @@ class Visitas_tela(Screen):
                 else:
                     maior_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
                     menor_data = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
-                print(menor_data, maior_data)
+                #print(menor_data, maior_data)
                 for visita in match:
                     if int(visita['data'][-4:]) < int(menor_data[-4:]): #verificando ano
                         remover.append(visita)
@@ -153,7 +153,7 @@ class Visitas_tela(Screen):
                             else:
                                 remover.append(visita)
             else: #significa que só tem uma data na busca
-                data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
+                data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano 
                 #print(data)
                 for visita in self.dados_visitas:
                     if visita['data'] != data:

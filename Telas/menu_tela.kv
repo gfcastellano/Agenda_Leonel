@@ -13,8 +13,10 @@
         orientation: 'horizontal'
         margin: 120, 0, 0, 0
         padding: 50
-        spacing: 10
+        spacing: 50
+        size_hint_y: 0.8
         BoxLayout:
+            padding: 40
             orientation: 'vertical'
             BotaoMenu:
                 text: 'Busca Avançada por cliente'
@@ -31,6 +33,7 @@
                 text: 'Sair'
                 on_release: app.stop()
         BoxLayout:
+            padding: 40
             orientation: 'vertical'
             BotaoMenu:
                 text: 'Mapa'
