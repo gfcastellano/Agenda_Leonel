@@ -318,6 +318,7 @@ class MainApp(MDApp):
             print('Criou novo usuário na base de dados?', response.ok)
             print(json.loads(response.content.decode()))
             
+            app.root.transition.direction = 'left'
             app.root.current = 'Menu_tela'
 
         elif sign_up_request.ok == False:
@@ -365,5 +366,15 @@ class MainApp(MDApp):
             error_data = json.loads(signin_request.content.decode())
             error_message = error_data["error"]['message']
             app.root.get_screen('Login_tela').ids.mensagem.text = "EMAIL EXISTS - " + error_message
+
+    def logout(self):
+        import os
+        app = MDApp.get_running_app()
+
+        os.remove("refresh_token")    
+
+        app.root.transition.direction = 'right'
+        app.root.current = 'Login_tela'  
+
 
 MainApp().run()
