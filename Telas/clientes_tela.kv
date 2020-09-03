@@ -34,7 +34,14 @@
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-
+    MDFloatingActionButton:
+        icon: 'plus'
+        md_bg_color: app.theme_cls.primary_dark
+        rotation_root_button: True
+        pos_hint: {"center_x": .9, "center_y": .1}
+        on_release: 
+            app.root.transition.direction = 'left'
+            app.root.current = 'Adicionar_cliente_tela'
 
 
 <Cliente>:

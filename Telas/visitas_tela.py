@@ -42,7 +42,9 @@ class Visitas_tela(Screen):
         if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
             scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for data in self.ordenar_visitas(dados_visitas):
-            for visita in reversed(dados_visitas):
+            #print('DATA:', data)
+            for visita in dados_visitas:
+                #print('VISITA:',visita)
                 if time.strftime('%d/%m/%Y', data) == str(visita['data']):
                     #print('VISITA:',visita)
                     #dia  = visita['data'][-2:]
@@ -56,6 +58,7 @@ class Visitas_tela(Screen):
                                             contato = visita['contato'],
                                             informacoes = visita['informacoes'],
                                             visita = visita['visita']))
+                    dados_visitas.remove(visita)
                     break
                 else:
                     #print('Não deu match da data')

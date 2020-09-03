@@ -17,44 +17,94 @@
         size_hint_y: 0.8
         BoxLayout:
             padding: 40
+            spacing: 40
             orientation: 'vertical'
-            BotaoMenu:
-                text: 'Busca Avançada por cliente'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Busca_tela'
-            BotaoMenu:
-                text: 'Adicionar Cliente'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Adicionar_cliente_tela'
+            BoxLayout:
+                spacing:20
+                MDIconButton:
+                    icon: 'database-search'
+                    elevation_normal: 12
+                    md_bg_color: app.theme_cls.primary_color
+                    user_font_size: "35sp"
+                MDRaisedButton:
+                    text: 'Busca Avançada por cliente'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Busca_tela'
+            #BotaoMenu:
+            #    text: 'Adicionar Cliente'
+                #on_release: 
+                #    app.root.transition.direction = 'left'
+                #    app.root.current = 'Adicionar_cliente_tela'
+            BoxLayout:
+                spacing:20
+                MDIconButton:
+                    icon: 'close-box-outline'
+                    elevation_normal: 12
+                    md_bg_color: app.theme_cls.primary_color
+                    user_font_size: "35sp"
+                    on_release: app.stop()
+                MDRaisedButton:
+                    text: 'Sair'
+                    on_release: app.stop()
             
-            BotaoMenu:
-                text: 'Sair'
-                on_release: app.stop()
+            #BotaoMenu:
+            #    text: 'Sair'
+            #    on_release: app.stop()
         BoxLayout:
             padding: 40
+            spacing: 40
+            #size_hint_y: 0.5
+            #height: 100
             orientation: 'vertical'
-            BotaoMenu:
-                text: 'Mapa'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Mapa_tela'
-            BotaoMenu:
-                text: 'Clientes'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Clientes_tela'
-            BotaoMenu:
-                text: 'Lembretes'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Lembretes_tela'        
-            BotaoMenu:
-                text: 'Visitas'
-                on_release: 
-                    app.root.transition.direction = 'left'
-                    app.root.current = 'Visitas_tela'
+            BoxLayout:
+                spacing:20
+                BotoesDireita:
+                    icon: 'map'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Mapa_tela'
+                MDRaisedButton:
+                    text: 'Mapa'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Mapa_tela'
+            BoxLayout:
+                spacing:20
+                BotoesDireita:
+                    icon: 'notebook'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Clientes_tela'
+                MDRaisedButton:
+                    text: 'Clientes'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Clientes_tela'
+            BoxLayout:
+                spacing:20
+                BotoesDireita:
+                    icon: 'reminder'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Lembretes_tela'   
+                MDRaisedButton:
+                    text: 'Lembretes'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Lembretes_tela'   
+            BoxLayout:
+                spacing:20
+                BotoesDireita:
+                    icon: 'file-cabinet'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Visitas_tela'
+                MDRaisedButton:
+                    text: 'Visitas'
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Visitas_tela'
         
         #BotaoMenu:
         #    text: 'Ordenar'
@@ -67,3 +117,7 @@
     background_color: app.theme_cls.primary_color
     
     
+<BotoesDireita@MDIconButton>:
+    elevation_normal: 12
+    md_bg_color: app.theme_cls.primary_color
+    user_font_size: "14sp"
