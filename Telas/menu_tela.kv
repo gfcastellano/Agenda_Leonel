@@ -13,16 +13,16 @@
         orientation: 'horizontal'
         #margin: 120, 0, 0, 0
         #padding: 20,20,20,20
-        spacing: 50
+        #spacing: 50
         size_hint_y: 0.8
         BoxLayout:
-            padding: 40
-            spacing: 40
+            #padding: 40
+            #spacing: 40
             orientation: 'vertical'
             BoxLayout:
-                spacing:10
+                spacing:20,0
                 BotoesDireita:
-                    icon: 'database-search'
+                    icon: 'folder-search'
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Busca_tela'
@@ -33,7 +33,7 @@
                         app.root.transition.direction = 'left'
                         app.root.current = 'Busca_tela'
             BoxLayout:
-                spacing:10
+                spacing:20,0
                 BotoesDireita:
                     icon: 'close-box-outline'
                     on_release: app.stop()
@@ -43,13 +43,11 @@
                     on_release: app.stop()
             
         BoxLayout:
-            padding: 40
-            spacing: 40
-            #size_hint_y: 0.5
-            #height: 100
+            #padding:20
+            #spacing: 10
             orientation: 'vertical'
             BoxLayout:
-                spacing:20
+                spacing:20,0
                 BotoesDireita:
                     icon: 'map'
                     on_release: 
@@ -62,7 +60,7 @@
                         app.root.transition.direction = 'left'
                         app.root.current = 'Mapa_tela'
             BoxLayout:
-                spacing:20
+                spacing:20,0
                 BotoesDireita:
                     icon: 'notebook'
                     on_release: 
@@ -75,7 +73,7 @@
                         app.root.transition.direction = 'left'
                         app.root.current = 'Clientes_tela'
             BoxLayout:
-                spacing:20
+                spacing:20,0
                 BotoesDireita:
                     icon: 'reminder'
                     on_release: 
@@ -88,9 +86,9 @@
                         app.root.transition.direction = 'left'
                         app.root.current = 'Lembretes_tela'   
             BoxLayout:
-                spacing:20
+                spacing:20,0
                 BotoesDireita:
-                    icon: 'file-cabinet'
+                    icon: 'briefcase'
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Lembretes_tela'   
