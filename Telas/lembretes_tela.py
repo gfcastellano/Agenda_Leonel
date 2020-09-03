@@ -154,7 +154,7 @@ class Lembretes_tela(Screen):
                             else:
                                 remover.append(visita)
             else: #significa que só tem uma data na busca
-Erros                data =  self.primeiro_dia + '/' + self.primeiro_mes + '/' +  self.primeiro_ano
+                data =  self.primeiro_dia + '/' + self.primeiro_mes + '/' +  self.primeiro_ano
                 #print(data)
                 for lembrete in self.dados_lembretes:
                     if lembrete['data'] != data:
