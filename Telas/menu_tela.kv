@@ -11,8 +11,8 @@
         elevation: 11
     BoxLayout:
         orientation: 'horizontal'
-        margin: 120, 0, 0, 0
-        padding: 50
+        #margin: 120, 0, 0, 0
+        #padding: 20,20,20,20
         spacing: 50
         size_hint_y: 0.8
         BoxLayout:
@@ -20,37 +20,28 @@
             spacing: 40
             orientation: 'vertical'
             BoxLayout:
-                spacing:20
-                MDIconButton:
+                spacing:10
+                BotoesDireita:
                     icon: 'database-search'
-                    elevation_normal: 12
-                    md_bg_color: app.theme_cls.primary_color
-                    user_font_size: "10dp"
-                MDRaisedButton:
-                    text: 'Busca Avançada por cliente'
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Busca_tela'
-            #BotaoMenu:
-            #    text: 'Adicionar Cliente'
-                #on_release: 
-                #    app.root.transition.direction = 'left'
-                #    app.root.current = 'Adicionar_cliente_tela'
+                MDRaisedButton:
+                    text: 'Busca Avançada'
+                    pos_hint: {'center_y':0.5}
+                    on_release: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'Busca_tela'
             BoxLayout:
-                spacing:20
-                MDIconButton:
+                spacing:10
+                BotoesDireita:
                     icon: 'close-box-outline'
-                    elevation_normal: 12
-                    md_bg_color: app.theme_cls.primary_color
-                    user_font_size: "10dp"
                     on_release: app.stop()
                 MDRaisedButton:
                     text: 'Sair'
+                    pos_hint: {'center_y':0.5}
                     on_release: app.stop()
             
-            #BotaoMenu:
-            #    text: 'Sair'
-            #    on_release: app.stop()
         BoxLayout:
             padding: 40
             spacing: 40
@@ -66,6 +57,7 @@
                         app.root.current = 'Mapa_tela'
                 MDRaisedButton:
                     text: 'Mapa'
+                    pos_hint: {'center_y':0.5}
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Mapa_tela'
@@ -78,6 +70,7 @@
                         app.root.current = 'Clientes_tela'
                 MDRaisedButton:
                     text: 'Clientes'
+                    pos_hint: {'center_y':0.5}
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Clientes_tela'
@@ -90,6 +83,7 @@
                         app.root.current = 'Lembretes_tela'   
                 MDRaisedButton:
                     text: 'Lembretes'
+                    pos_hint: {'center_y':0.5}
                     on_release: 
                         app.root.transition.direction = 'left'
                         app.root.current = 'Lembretes_tela'   
@@ -99,12 +93,14 @@
                     icon: 'file-cabinet'
                     on_release: 
                         app.root.transition.direction = 'left'
-                        app.root.current = 'Visitas_tela'
+                        app.root.current = 'Lembretes_tela'   
                 MDRaisedButton:
-                    text: 'Visitas'
+                    text: 'Visitas'                    
+                    pos_hint: {'center_y':0.5}
                     on_release: 
                         app.root.transition.direction = 'left'
-                        app.root.current = 'Visitas_tela'
+                        app.root.current = 'Lembretes_tela'
+            
         
         #BotaoMenu:
         #    text: 'Ordenar'
@@ -118,6 +114,16 @@
     
     
 <BotoesDireita@MDIconButton>:
-    elevation_normal: 12
-    md_bg_color: app.theme_cls.primary_color
-    user_font_size: "10dp"
+    elevation_normal: 12    
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.primary_dark
+    pos_hint: {'center_y':0.5}
+    #user_font_size: "10dp"
+
+
+#<BotoesDireita@BoxLayout>:
+#    spacing:20
+#    MDIconButton:
+#        elevation_normal: 12
+#        text_color: app.theme_cls.primary_color
+#    MDRaisedButton:
