@@ -32,28 +32,29 @@
                         height: 60
                         MDLabel:
                             text: 'Identificador:'
-                            width: root.ids.DATA.width
+                            size_hint_x: 1
                         MDLabel:
                             id: identificador
                             text: ''
-                    BoxLayout:
-                        size_hint_y: None
-                        height: self.minimum_height
-                        MDLabel:
-                            id: DATA
-                            text: ' Data:'
-                            halign: 'left'
-                            valign: 'center'
-                            text_size: None, self.height
-                            size_hint_x: None
-                            width: self.texture_size[0]   
-                        MDIconButton:
-                            icon: 'calendar'
-                            on_release: root.abrir_popup_data()
-                            pos_hint:{'center_y':0.5}
-                        MDTextField:
-                            id: data	
-                            halign: 'center'
+                            size_hint_x: 3
+                    #BoxLayout:
+                        #size_hint_y: None
+                        #height: self.minimum_height
+                        #MDLabel:
+                        #    id: DATA
+                        #    text: ' Data:'
+                        #    halign: 'left'
+                        #    valign: 'center'
+                        #    text_size: None, self.height
+                        #    size_hint_x: None
+                        #    width: self.texture_size[0]   
+                        #MDIconButton:
+                        #    icon: 'calendar'
+                        #    on_release: root.abrir_popup_data()
+                        #    pos_hint:{'center_y':0.5}
+                        #MDTextField:
+                        #    id: data	
+                        #    halign: 'center'
                     BoxLayout:
                         MDLabelButton:
                             text: 'Cliente:'
@@ -67,52 +68,54 @@
                             icon: 'account-search'	
                             on_release: root.mostrar_popup()
                             pos_hint: {'center_y':0.5}
+                    #BoxLayout:
+                    #    MDLabel:
+                    #        text: 'Contato:'
+                    #        size_hint_x: 1
+                    #        haling: 'bottom'
+                    #    MDTextField:
+                    #        size_hint_x: 3
+                    #        id: contato
+                    #    MDIconButton:
+                    #        icon: 'account-search'	
+                    #        on_release: root.pesquisar_contato()
+                    #        pos_hint: {'center_y':0.5}
+                    #oxLayout:
+                    #    MDLabel:
+                    #        text: " Visita:"
+                    #       size_hint_x: 1
+                    #        haling: 'bottom'
+                    #    MDTextField:
+                    #        size_hint_x: 3
+                    #        id: visita
+                    #    MDIconButton:
+                    #        icon: 'text-search'	
+                    #        on_release: root.pesquisar_visita()
+                    #        pos_hint: {'center_y':0.5}
+                    #BoxLayout:
+                    #    MDLabel:
+                    #        text: ' Informações:'
+                    #        size_hint_x: 1
+                    #    MDTextField:
+                    #        multiline: True
+                    #        id: informacoes
+                    #        size_hint_x: 3
+                    #MDSeparator:
+                    #    height: "20dp"
+                    #BoxLayout:
+                    #    MDLabel:
+                    #        text: ' Deseja marcar um lembrete?'
+                    #        size_hint_x: 4
+                    #    MDCheckbox:
+                    #        id: pergunta_lembrete
                     BoxLayout:
                         MDLabel:
-                            text: 'Contato:'
-                            size_hint_x: 1
-                            haling: 'bottom'
+                            text: ' Lembrete:'
                         MDTextField:
-                            size_hint_x: 3
-                            id: contato
-                        MDIconButton:
-                            icon: 'account-search'	
-                            on_release: root.pesquisar_contato()
-                            pos_hint: {'center_y':0.5}
-                    BoxLayout:
-                        MDLabel:
-                            text: " Visita:"
-                            size_hint_x: 1
-                            haling: 'bottom'
-                        MDTextField:
-                            size_hint_x: 3
-                            id: visita
-                        MDIconButton:
-                            icon: 'text-search'	
-                            on_release: root.pesquisar_visita()
-                            pos_hint: {'center_y':0.5}
-                    BoxLayout:
-                        MDLabel:
-                            text: ' Informações:'
-                            size_hint_x: 1
-                        MDTextField:
+                            id: lembrete
                             multiline: True
-                            id: informacoes
-                            size_hint_x: 3
-                    MDSeparator:
-                        height: "20dp"
-                    BoxLayout:
-                        MDLabel:
-                            text: ' Deseja marcar um lembrete?'
-                            size_hint_x: 4
-                        MDCheckbox:
-                            id: pergunta_lembrete
-                    MDLabel:
-                        text: ' Lembrete:'
-                    MDTextField:
-                        id: lembrete
-                        multiline: True
-                        lines: 3                    
+                            lines: 3           
+                            size_hint_x: 3         
                     BoxLayout:
                         MDLabel:
                             text: 'Para o dia:'

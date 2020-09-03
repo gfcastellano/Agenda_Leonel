@@ -229,6 +229,7 @@ class MainApp(MDApp):
         # Armazena váriáveis necessárias
         to_database = json.dumps(dados)
         print('to_database:',to_database)
+        
         try:
             codigo = int(dados['codigo'])
             print('Encontrou codigo. Ou seja, um cliente foi passado para o app.patch()')
@@ -236,7 +237,12 @@ class MainApp(MDApp):
         except:
             pass
         nome_fantasia = str(dados['nome_fantasia'])
-        data = str(dados['data'])
+
+        try:
+            data = str(dados['data'])
+        except:
+            pass
+
         try:
             index = str(dados['identificador'])
             print('Encontrou index. Ou seja, uma visita ou um lembrete foi passada para o app.patch()')

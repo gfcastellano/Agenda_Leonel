@@ -23,7 +23,7 @@
                 	id: buscar
                 	font_size: 40
                 	size_hint_x: 4
-                	hint_text: 'Pesquisar'
+                	hint_text: 'Pesquisar por cliente'
             	MDIconButton:
                 	text: 'Buscar'
                 	on_release: root.apagar_texto() 
@@ -49,6 +49,7 @@
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                padding: "10dp"
 
     MDFloatingActionButton:
         icon: 'plus'
@@ -72,7 +73,7 @@
         orientation: 'vertical'
         padding: 30
         MDLabel:
-            text: 'Identificador: '
+            text: 'Identificador da visita: '
             halign: 'left'
             valign: 'bottom'
             size_hint_x: 3

@@ -11,41 +11,50 @@
         elevation: 11
     BoxLayout:
         orientation: 'vertical'
+        margin: 120, 0, 0, 0
         padding: 50
-        spacing: 50
-        MDRaisedButton:
+        spacing: 10
+        BotaoMenu:
             text: 'Mapa'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Mapa_tela'
-        MDRaisedButton:
+        BotaoMenu:
             text: 'Lista de Clientes'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Clientes_tela'
-        MDRaisedButton:
+        BotaoMenu:
             text: 'Busca Avançada'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Busca_tela'
-        MDRaisedButton:
-            text: 'Lembretes'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Lembretes_tela'
-        MDRaisedButton:
+        BotaoMenu:
             text: 'Adicionar Cliente'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Adicionar_cliente_tela'
-        MDRaisedButton:
+        BotaoMenu:
+            text: 'Lembretes'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Lembretes_tela'        
+        BotaoMenu:
             text: 'Visitas'
             on_release: 
                 app.root.transition.direction = 'left'
                 app.root.current = 'Visitas_tela'
-        MDRaisedButton:
+        BotaoMenu:
             text: 'Sair'
             on_release: app.stop()
-        MDRaisedButton:
-            text: 'Ordenar'
-            on_release: app.root.get_screen('Lembretes_tela').ordenar_lembretes()
+        #BotaoMenu:
+        #    text: 'Ordenar'
+        #    on_release: print(app.theme_cls.primary_color)
+
+
+
+<BotaoMenu@Button>:
+    #width: 800
+    background_color: app.theme_cls.primary_color
+    
+    

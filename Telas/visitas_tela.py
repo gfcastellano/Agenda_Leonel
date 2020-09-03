@@ -96,23 +96,25 @@ class Visitas_tela(Screen):
         app = MDApp.get_running_app()
         self.dados_visitas = app.dados_visitas
         for visita in self.dados_visitas:
-            if parametro == 'codigo':
-                if texto in str(visita['codigo']):
-                    match.append(visita)
-            else:
-                if texto in str(visita['nome_fantasia']).lower():
-                    match.append(visita)
+            #print('a visita aqui',visita)
+            #if parametro == 'codigo':
+            #    if texto in str(visita['codigo']):
+            #        match.append(visita)
+            #else:
+
+            if texto in str(visita['nome_fantasia']).lower():
+                match.append(visita)
 
         remover=[]
         if self.ids.data.text != '':  #Verifica se tem a condição de data
             if len(self.ids.data.text) > 10: #verifica se tem uma ou duas datas
                 if self.ordem == 'primeiro':
                     menor_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
-                    maior_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
+                    maior_data = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
                 else:
                     maior_data = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
-                    menor_data = self.segundo_dia + '-' + self.segundo_mes + '-' + self.segundo_ano
-                #print(menor_data, maior_data)
+                    menor_data = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
+                print(menor_data, maior_data)
                 for visita in match:
                     if int(visita['data'][-4:]) < int(menor_data[-4:]): #verificando ano
                         remover.append(visita)

@@ -57,9 +57,9 @@ class Lembretes_tela(Screen):
                     #print(data)    
                     scroll.add_widget(Lembrete(data = data,
                                             nome_fantasia = lembrete['nome_fantasia'],                                     
-                                            contato = lembrete['contato'],
+                                            #contato = lembrete['contato'],
                                             lembrete = lembrete['lembrete'],
-                                            informacoes = lembrete['informacoes'],
+                                            #informacoes = lembrete['informacoes'],
                                             identificador = str(lembrete['identificador'])))
                     #print('Será excluido este lembrete da lista:', lembrete['identificador'])
                     dados_lembretes.remove(lembrete)
@@ -97,12 +97,14 @@ class Lembretes_tela(Screen):
         self.dados_lembretes = app.dados_lembretes 
         
         for lembrete in self.dados_lembretes:
-            if parametro == 'codigo':
-                if texto in str(lembrete['codigo']):
-                    match.append(lembrete)
-            else:
-                if texto in str(lembrete['nome_fantasia']).lower():
-                    match.append(lembrete)
+            print('AQUIIIII PRINT DO LEMBRETE',lembrete)
+            #if parametro == 'codigo':
+            #    if texto in str(lembrete['codigo']):
+            #        match.append(lembrete)
+            #else:
+            
+            if texto in str(lembrete['nome_fantasia']).lower():
+                match.append(lembrete)
 
         remover=[]
         if self.ids.data.text != '':  #Verifica se tem a condição de data
@@ -291,7 +293,7 @@ class Lembretes_tela(Screen):
         #print(len(datas))
         #print(type(datas))
         from pprint import pprint
-        pprint(sorted(datas))
+        #pprint(sorted(datas))
         return sorted(datas)
 
     
@@ -301,7 +303,7 @@ class Lembrete(MDCard):
         super().__init__(**kwargs)
         self.ids.data.text ,self.data         = data,data
         self.ids.nome_fantasia.text ,self.nome_fantasia  = nome_fantasia,nome_fantasia
-        self.ids.contato.text ,self.contato        = contato,contato
+        #self.ids.contato.text ,self.contato        = contato,contato
         self.ids.lembrete.text ,self.lembrete         = lembrete,lembrete
         #self.ids.informacoes.text  ,self.informacoes   = informacoes,informacoes
         self.ids.identificador.text  ,self.identificador = identificador,identificador

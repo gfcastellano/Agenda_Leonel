@@ -18,6 +18,7 @@ class Lembrete_tela(Screen):
     popup_pesquisa_cliente=None
     popup_pesquisa_contato=None
     popup_pesquisa_visita=None
+    popup_infos=None
 
     def on_pre_enter(self):
         print('Entrando em Cliente_tela')
@@ -40,24 +41,27 @@ class Lembrete_tela(Screen):
         print(objeto)
         print(type(objeto))
         print(objeto.nome_fantasia)
-        self.ids.data.text    = objeto.ids.data.text
+        #self.ids.data.text    = objeto.ids.data.text
         #self.ids.codigo.text  = objeto.ids.codigo.text
         self.ids.nome_fantasia.text    = objeto.ids.nome_fantasia.text
-        self.ids.contato.text    = objeto.ids.contato.text
+        #self.ids.contato.text    = objeto.ids.contato.text
         #self.ids.informacoes.text    = objeto.ids.informacoes.text
-#        self.ids.visita.text    = objeto.ids.visita.text
+        #self.ids.visita.text    = objeto.ids.visita.text
         self.ids.identificador.text    = objeto.ids.identificador.text
+        self.ids.lembrete.text    = objeto.ids.lembrete.text
 
     def limpar(self):
         data = date.today()
         self.primeiro_dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
         self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
         self.primeiro_ano = str(data.year)
-        self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+        #self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
         self.ids.nome_fantasia.text    = ''
-        self.ids.contato.text    = ''
-        self.ids.informacoes.text    = ''
-        self.ids.visita.text    = ''
+        #self.ids.contato.text    = ''
+        #self.ids.informacoes.text    = ''
+        #self.ids.visita.text    = ''
+        self.ids.lembrete.text    = ''
+        self.ids.data_lembrete.text    = ''
 
     def abrir_popup_data(self):
         primeiro_calendario = MDDatePicker(callback = self.marcar_data_visita)
@@ -133,16 +137,21 @@ class Lembrete_tela(Screen):
         self.popup_pesquisa_visita.open()
 
     def adicionar_lembrete(self):
+
+        MDApp.get_running_app().popup_leituradados.open()
+        Clock.schedule_once(self.adicionando_cliente_ao_firebase,0.1)
+
+    def adicionando_cliente_ao_firebase(self,*args):
         print("Execuntando adicionar_lembrete")
         novo_visita={}
-        data       = self.ids.data.text
+        #data       = self.ids.data.text
         nome_fantasia   = self.ids.nome_fantasia.text
-        contato     = self.ids.contato.text
-        visita     = self.ids.visita.text
+        #contato     = self.ids.contato.text
+        #visita     = self.ids.visita.text
         identificador = self.ids.identificador.text
-        informacoes     = self.ids.informacoes.text
+        #informacoes     = self.ids.informacoes.text
         lembrete        =self.ids.lembrete.text
-        pergunta_lembrete = self.ids.pergunta_lembrete.state
+        #pergunta_lembrete = self.ids.pergunta_lembrete.state
         data_lembrete = self.ids.data_lembrete.text
         
 
@@ -152,14 +161,14 @@ class Lembrete_tela(Screen):
             print('Não existem os dados mínimos necessários, não salvando as alterações')
         else:
             print("Existem dados mínimos necessários para adicionar lembrete")
-            novo_visita['data']            = data
+            #novo_visita['data']            = data
             novo_visita['nome_fantasia']   = nome_fantasia
-            novo_visita['contato']         = contato
-            novo_visita['visita']          = visita
-            novo_visita['informacoes']     = informacoes
+            #novo_visita['contato']         = contato
+            #novo_visita['visita']          = visita
+            #novo_visita['informacoes']     = informacoes
             novo_visita['identificador']   = identificador
             novo_visita['lembrete']        = lembrete 
-            novo_visita['pergunta_lembrete']   = pergunta_lembrete
+            #novo_visita['pergunta_lembrete']   = pergunta_lembrete
             novo_visita['data_lembrete']   = data_lembrete
             
             #self.novo_visita = novo_visita

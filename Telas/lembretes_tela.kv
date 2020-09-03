@@ -23,7 +23,7 @@
                 	id: buscar
                 	font_size: 40
                 	size_hint_x: 4
-                	hint_text: 'Pesquisar'
+                	hint_text: 'Pesquisar por cliente'
             	MDIconButton:
                 	text: 'Buscar'
                 	on_release: root.apagar_texto() 
@@ -49,6 +49,7 @@
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                padding: "10dp"
 
     MDFloatingActionButton:
         icon: 'plus'
@@ -73,7 +74,7 @@
         orientation: 'vertical'
         padding: 30
         MDLabel:
-            text: 'Identificador: '
+            text: 'Identificador do lembrete: '
             halign: 'left'
             valign: 'bottom'
             size_hint_x: 3
@@ -102,18 +103,18 @@
             size_hint_x: 6
             color: app.theme_cls.primary_dark
             bold: True
-        MDLabel:
-            text: 'Contato:'
-            size_hint_x: 0.4
-            halign: 'left'
-            size_hint_y: None
-            bold: True
-        MDLabel:
-            id: contato
-            size_hint_x: 0.4
-            size_hint_y: None
-            halign: 'left'
-            valign: 'middle'
+        #MDLabel:
+        #    text: 'Contato:'
+        #    size_hint_x: 0.4
+        #    halign: 'left'
+        #   size_hint_y: None
+        #    bold: True
+        #MDLabel:
+        #    id: contato
+        #    size_hint_x: 0.4
+        #    size_hint_y: None
+        #   halign: 'left'
+        #   valign: 'middle'
         MDLabel:
             text: 'Lembrete:'
             size_hint_x: 0.4

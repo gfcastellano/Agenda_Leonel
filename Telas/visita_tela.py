@@ -127,6 +127,10 @@ class Visita_tela(Screen):
         self.popup_pesquisa_visita.open()
 
     def adicionar_visita(self):
+        MDApp.get_running_app().popup_leituradados.open()
+        Clock.schedule_once(self.adicionando_visita_ao_firebase,0.1)
+
+    def adicionando_visita_ao_firebase(self,*args):
         print("Execuntando adicionar_visita")
         novo_visita={}
         data       = self.ids.data.text
@@ -159,11 +163,12 @@ class Visita_tela(Screen):
         # Requisitar dados novos
         app.get()
         # Repopular a tela anterior
-        if app.root.get_screen('Visitas_tela').ids.buscar.text != '':
+        if app.root.get_screen('Visitas_tela').ids.buscar.text == '':
             app.root.get_screen('Visitas_tela').buscar()
         # Voltar a tela anterior
         app.root.transition.direction = 'right'
         app.root.current = app.telas[-2] # 'Visitas_tela'
+        app.popup_leituradados.dismiss()
 
     def adicionar_nome_fantasia(self):
         app = MDApp.get_running_app()
