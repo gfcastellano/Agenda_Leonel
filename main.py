@@ -229,7 +229,7 @@ class MainApp(MDApp):
         # Armazena váriáveis necessárias
         to_database = json.dumps(dados)
         print('to_database:',to_database)
-        
+
         try:
             codigo = int(dados['codigo'])
             print('Encontrou codigo. Ou seja, um cliente foi passado para o app.patch()')
@@ -257,7 +257,7 @@ class MainApp(MDApp):
         print('Iniciou o patch')
         print(list(dados.keys()))
 
-        if 'visita' in list(dados.keys()) and 'lembrete' in list(dados.keys()):
+        if 'visita' in list(dados.keys()) and 'pergunta_lembrete' in list(dados.keys()):
             response = requests.patch(url = self.url_db + self.local_id + '/visitas/' + index + '.json?auth=' + self.id_token,
                                     data = to_database)
             print('Fez o patch das visitas?', response.ok)

@@ -10,43 +10,49 @@
         pos_hint: {'top':1}
         elevation: 11
     BoxLayout:
-        orientation: 'vertical'
+        orientation: 'horizontal'
         margin: 120, 0, 0, 0
         padding: 50
         spacing: 10
-        BotaoMenu:
-            text: 'Mapa'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Mapa_tela'
-        BotaoMenu:
-            text: 'Lista de Clientes'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Clientes_tela'
-        BotaoMenu:
-            text: 'Busca Avançada'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Busca_tela'
-        BotaoMenu:
-            text: 'Adicionar Cliente'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Adicionar_cliente_tela'
-        BotaoMenu:
-            text: 'Lembretes'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Lembretes_tela'        
-        BotaoMenu:
-            text: 'Visitas'
-            on_release: 
-                app.root.transition.direction = 'left'
-                app.root.current = 'Visitas_tela'
-        BotaoMenu:
-            text: 'Sair'
-            on_release: app.stop()
+        BoxLayout:
+            orientation: 'vertical'
+            BotaoMenu:
+                text: 'Busca Avançada por cliente'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Busca_tela'
+            BotaoMenu:
+                text: 'Adicionar Cliente'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Adicionar_cliente_tela'
+            
+            BotaoMenu:
+                text: 'Sair'
+                on_release: app.stop()
+        BoxLayout:
+            orientation: 'vertical'
+            BotaoMenu:
+                text: 'Mapa'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Mapa_tela'
+            BotaoMenu:
+                text: 'Lista de Clientes'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Clientes_tela'
+            BotaoMenu:
+                text: 'Lista de Lembretes'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Lembretes_tela'        
+            BotaoMenu:
+                text: 'Lista de Visitas'
+                on_release: 
+                    app.root.transition.direction = 'left'
+                    app.root.current = 'Visitas_tela'
+        
         #BotaoMenu:
         #    text: 'Ordenar'
         #    on_release: print(app.theme_cls.primary_color)
