@@ -37,6 +37,7 @@ class Visitas_tela(Screen):
 
     def adicionar_visitas(self, dados_visitas):
         import time
+        dados_visitas_copia = dados_visitas.copy()
         print('Adicionando visitas na tela Visitas_tela')
         scroll = MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll
         if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
@@ -65,23 +66,32 @@ class Visitas_tela(Screen):
                     pass
 
         #Adicionando visitas na visitas_tab
+        print('Adicionando visitas na tela Info_tela em Info_tab')
         visitas_tab = MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll
-        if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
+        if len(dados_visitas_copia) == 0: #Caso ele receba um match que contem nada
             visitas_tab.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
-        for visita in reversed(dados_visitas):
-            #print(visita)
-            #dia  = visita['data'][-2:]
-            #mes  = visita['data'][-5:-3]
-            #ano  = visita['data'][-10:-6]
-            #data = dia + '/' + mes + '/' + ano
-            data=visita['data']
-            visitas_tab.add_widget(Visita(data = data,
-                                          nome_fantasia = visita['nome_fantasia'],
-                                          identificador = str(visita['identificador']),
-                                          contato = visita['contato'],
-                                          informacoes = visita['informacoes'],
-                                          visita = visita['visita']
-                                          ))
+        for data in self.ordenar_visitas(dados_visitas_copia):
+            #print('DATA:', data)
+            for visita in dados_visitas_copia:
+                #print('VISITA:',visita['identificador'])
+                if time.strftime('%d/%m/%Y', data) == str(visita['data']):
+                    #print('VISITA:',visita)
+                    #dia  = visita['data'][-2:]
+                    #mes  = visita['data'][-5:-3]
+                    #ano  = visita['data'][-10:-6]
+                    #data = dia + '/' + mes + '/' + ano
+                    data=visita['data']
+                    visitas_tab.add_widget(Visita(data = data,
+                                            nome_fantasia = visita['nome_fantasia'],                                     
+                                            identificador = str(visita['identificador']),
+                                            contato = visita['contato'],
+                                            informacoes = visita['informacoes'],
+                                            visita = visita['visita']))
+                    dados_visitas_copia.remove(visita)
+                    break
+                else:
+                    #print('Não deu match da data')
+                    pass
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
